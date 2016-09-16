@@ -1,32 +1,19 @@
-<div class="container">
-
-  <div class="section">
-    <div class="row center">
-      <h2 id="name" class="header col s12 red-text text-darken-4">WACCM-GEC</h2>
-      <h5 class="header col s12 brown-text text-darken-2"><span><a href="https://www2.acom.ucar.edu/gcm/waccm" class="brown-text text-darken-2">Whole Atmosphere Community Climate Model</a></span> - Global Electric Circuit</h5>
-    </div>
-  </div>
-
-  <hr id="hr-gec-1">
-
-  <div id="gec-breadcrumb-nav">
-    <div>
+<div class="section gec-nav">
+  <div class="row center gec-nav">
+    <div id="gec-breadcrumb-nav">
       <ul class="col s12">
-        <li class="active"><a ui-sref="gec" class="gec brown-text text-darken-2">WACCM-GEC</a></li>
-        <li><a ui-sref=".conductivity" class="gec brown-text text-darken-2">Conductivity</a></li>
-        <li><a ui-sref=".sources" class="gec brown-text text-darken-2">Sources</a></li>
-        <li><a ui-sref=".top-potential" class="gec brown-text text-darken-2">Top Potential</a></li>
-        <li><a ui-sref=".magnetospheric-currents" class="gec brown-text text-darken-2">Magnetospheric Currents</a></li>
-        <li><a ui-sref=".results" class="gec brown-text text-darken-2">Results</a></li>
+        <li><a ui-sref=".conductivity" class="gec btn brown darken-2">Conductivity</a></li>
+        <li><a ui-sref=".sources" class="gec btn brown darken-2">Sources</a></li>
+        <li><a ui-sref=".top-potential" class="gec btn brown darken-2">Top Potential</a></li>
+        <li><a ui-sref=".magnetospheric-currents" class="gec btn brown darken-2">Magnetospheric Currents</a></li>
+        <li><a ui-sref=".results" class="gec btn brown darken-2">Results</a></li>
       </ul>
     </div>
   </div>
-
-  <hr id="hr-gec-2">
 </div>
 
-  <div data-ng-if="$state.is('gec')">
-    <div ui-view="waccm-gec"></div>
-  </div>
+<div data-ng-if="$state.is('research.gec')">
+  <div ui-view="waccm-gec"></div>
+</div>
 
-  <div ui-view></div>
+<div ui-view></div>

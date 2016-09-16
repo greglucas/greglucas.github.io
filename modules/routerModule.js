@@ -16,44 +16,71 @@
           url: '/',
           templateUrl: 'partials/home.html'
         })
-        .state('gec',{
+        .state('research',{
+          url: '/research',
+          views: {
+            "": {
+              templateUrl: 'partials/research.html'
+            },
+            "overview@research": {
+              templateUrl: 'partials/overview.html'
+            }
+          }
+        })
+        .state('research.overview',{
+          url: '/overview',
+          templateUrl: 'partials/overview.html'
+        })
+        .state('research.gec',{
           url: '/GEC',
           views: {
             "": {
               templateUrl: 'partials/gec.html'
             },
-            "waccm-gec@gec": {
+            "waccm-gec@research.gec": {
               templateUrl: 'partials/waccm-gec.html'
             }
           }
         })
-        .state('gec.conductivity', {
+        .state('research.gec.conductivity', {
           url: '/conductivity',
           templateUrl: 'partials/conductivity.html'
         })
-        .state('gec.sources', {
+        .state('research.gec.sources', {
           url: '/sources',
           templateUrl: 'partials/sources.html'
         })
-        .state('gec.top-potential', {
+        .state('research.gec.top-potential', {
           url: '/top-potential',
           templateUrl: 'partials/top-potential.html'
         })
-        .state('gec.magnetospheric-currents', {
+        .state('research.gec.magnetospheric-currents', {
           url: '/magnetospheric-currents',
           templateUrl: 'partials/magnetospheric-currents.html'
         })
-        .state('gec.results', {
+        .state('research.gec.results', {
           url: '/results',
           templateUrl: 'partials/results.html'
         })
-        .state('programming', {
+        .state('research.programming', {
           url: '/programming',
           templateUrl: 'partials/programming.html'
         })
         .state('publications',{
           url: '/publications',
           templateUrl: 'partials/publications.html'
+        })
+        .state('experience',{
+          url: '/experience',
+          templateUrl: 'partials/experience.html'
+        })
+        .state('outdoors',{
+          url: '/outdoors',
+          templateUrl: 'partials/outdoors.html'
+        })
+        .state('contact',{
+          url: '/contact',
+          templateUrl: 'partials/contact.html'
         })
       $urlRouterProvider.otherwise('/')
     }

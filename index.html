@@ -30,13 +30,21 @@
 
 </head>
   <body>
-    <header>
 
       <header>
         <nav id="nav-color" class="red darken-4">
           <div class="nav-wrapper">
             <a ui-sref="home" id="logo-container" class="brand-logo"><span><img class="logo-image" src="./images/lucas-logo.png"/></span></a>
+            <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons white-text">menu</i></a>
             <ul class="right hide-on-med-and-down">
+              <li><a ui-sref="home">Home</a></li>
+              <li><a ui-sref="research">Research</a></li>
+              <li><a ui-sref="publications">Publications</a></li>
+              <li><a ui-sref="experience">Experience</a></li>
+              <li><a ui-sref="outdoors">Outdoors</a></li>
+              <li><a ui-sref="contact">Contact</a></li>
+            </ul>
+            <ul class="side-nav" id="mobile-demo">
               <li><a ui-sref="home">Home</a></li>
               <li>
                 <a class="dropdown-button" data-beloworigin="true" data-hover="true" data-constrainwidth="false" data-activates="dropdown1">Research</a>
@@ -58,6 +66,13 @@
             </ul>
           </div>
         </nav>
+
+        <script>
+          $(document).ready(function(){
+            $(".button-collapse").sideNav()
+          })
+        </script>
+
       </header>
 
     <main ui-view>

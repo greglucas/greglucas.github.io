@@ -1,0 +1,47 @@
+<div>
+  <div class="container">
+    <div class="parallax-container" id="research-parallax-container">
+        <div class="parallax" id="research-parallax">
+            <img src="./images/research-main.jpg">
+        </div>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <div class="section">
+      <div class="row center">
+        <h2 id="name" class="header col s12 red-text text-darken-4">Research</h2>
+      </div>
+
+      <hr id="hr-research-1">
+
+      <div id="gec-breadcrumb-nav">
+        <div>
+          <ul class="col s12">
+            <li><a ui-sref=".overview" class="research-btns btn red darken-4">Overview</a></li>
+            <li><a ui-sref=".gec" class="research-btns btn red darken-4">WACCM-GEC</a></li>
+            <li><a ui-sref=".programming" class="research-btns btn red darken-4">Programming</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <hr id="hr-research-2">
+
+      <div data-ng-if="$state.is('research')">
+        <div ui-view="overview"></div>
+      </div>
+
+      <div ui-view></div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+  $(document).ready(function(){
+    $('.parallax').parallax()
+  })
+</script>
