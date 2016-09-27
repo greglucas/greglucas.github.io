@@ -3,8 +3,9 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
     <title>Greg Lucas</title>
+    <base target="_blank">
 
     <!-- Link to my jQuery file -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
@@ -46,19 +47,7 @@
             </ul>
             <ul class="side-nav" id="mobile-demo">
               <li><a ui-sref="home">Home</a></li>
-              <li>
-                <a class="dropdown-button" data-beloworigin="true" data-hover="true" data-constrainwidth="false" data-activates="dropdown1">Research</a>
-                <!-- Dropdown Structure -->
-                <ul id="dropdown1" class="dropdown-content">
-                  <li><a ui-sref="gec">Global Electric Current</a></li>
-                  <li><a ui-sref="programming">Programming</a></li>
-                  <script>
-                  $(document).ready(function(){
-                    $(".dropdown-button").dropdown()
-                  })
-                  </script>
-                </ul>
-              </li>
+              <li><a ui-sref="research">Research</a></li>
               <li><a ui-sref="publications">Publications</a></li>
               <li><a ui-sref="experience">Experience</a></li>
               <li><a ui-sref="outdoors">Outdoors</a></li>
@@ -66,12 +55,6 @@
             </ul>
           </div>
         </nav>
-
-        <script>
-          $(document).ready(function(){
-            $(".button-collapse").sideNav()
-          })
-        </script>
 
       </header>
 
@@ -84,12 +67,11 @@
         </div>
     </footer>
 
-      <!-- Scripts -->
-      <script src="js/materialize.js"></script>
-      <script src="js/init.js"></script>
-      <script type="text/javascript" src="./modules/app.js"></script>
-      <script type="text/javascript" src="./modules/routerModule.js"></script>
-      <!-- <script type="text/javascript" src="./modules/homeModule.js"></script> -->
+    <!-- Scripts -->
+    <script src="js/materialize.js"></script>
+    <script src="js/init.js"></script>
+    <script type="text/javascript" src="./modules/app.js"></script>
+    <script type="text/javascript" src="./modules/routerModule.js"></script>
   </body>
 
 </html>

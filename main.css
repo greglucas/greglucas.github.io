@@ -15,7 +15,7 @@
 }
 
 .research-btns {
-  margin-right: 30px;
+  margin: 4px 2px;
 }
 
 #main-img {
@@ -154,13 +154,10 @@ main {
 
 .outdoors-card-4,
 .outdoors-card-5,
-.outdoors-card-6 {
-  width: 200px;
-  margin-right: 15px;
-}
-
+.outdoors-card-6,
 .outdoors-card-7 {
   width: 200px;
+  margin: 7px;
 }
 
 .outdoors-imgs-small {
@@ -210,7 +207,7 @@ main {
 }
 
 .gec {
-  margin: 0 2px;
+  margin: 4px 2px;
   padding: 0 20px;
 }
 
