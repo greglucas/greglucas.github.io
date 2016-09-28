@@ -6,69 +6,82 @@
       $rootScope.$state = $state
     })
 
-    .config(configRouter)
+    .config(configRouter);
 
-    configRouter.$inject = ['$stateProvider', '$urlRouterProvider']
+    configRouter.$inject = ['$stateProvider', '$urlRouterProvider'];
 
     function configRouter($stateProvider, $urlRouterProvider){
       $stateProvider
         .state('home',{
           url: '/',
-          templateUrl: 'partials/home.html'
+          templateUrl: 'partials/home.html',
+          controller: 'gregCtrl as gregCtrl'
         })
         .state('research',{
           url: '/research',
           views: {
             "": {
-              templateUrl: 'partials/research.html'
+              templateUrl: 'partials/research.html',
+              controller: 'gregCtrl as gregCtrl'
             },
             "overview@research": {
-              templateUrl: 'partials/overview.html'
+              templateUrl: 'partials/overview.html',
+              controller: 'gregCtrl as gregCtrl'
             }
           }
         })
         .state('research.overview',{
           url: '/overview',
-          templateUrl: 'partials/overview.html'
+          templateUrl: 'partials/overview.html',
+          controller: 'gregCtrl as gregCtrl'
         })
         .state('research.gec',{
           url: '/GEC',
           views: {
             "": {
-              templateUrl: 'partials/gec.html'
+              templateUrl: 'partials/gec.html',
+              controller: 'gregCtrl as gregCtrl'
             },
             "waccm-gec@research.gec": {
-              templateUrl: 'partials/waccm-gec.html'
+              templateUrl: 'partials/waccm-gec.html',
+              controller: 'gregCtrl as gregCtrl'
             }
           }
         })
         .state('research.gec.conductivity', {
           url: '/conductivity',
-          templateUrl: 'partials/conductivity.html'
+          templateUrl: 'partials/conductivity.html',
+          controller: 'gregCtrl as gregCtrl'
         })
         .state('research.gec.sources', {
           url: '/sources',
-          templateUrl: 'partials/sources.html'
+          templateUrl: 'partials/sources.html',
+          controller: 'gregCtrl as gregCtrl'
         })
         .state('research.gec.top-potential', {
           url: '/top-potential',
-          templateUrl: 'partials/top-potential.html'
+          templateUrl: 'partials/top-potential.html',
+          controller: 'gregCtrl as gregCtrl'
         })
         .state('research.gec.magnetospheric-currents', {
           url: '/magnetospheric-currents',
-          templateUrl: 'partials/magnetospheric-currents.html'
+          templateUrl: 'partials/magnetospheric-currents.html',
+          controller: 'gregCtrl as gregCtrl'
         })
         .state('research.gec.results', {
           url: '/results',
-          templateUrl: 'partials/results.html'
+          templateUrl: 'partials/results.html',
+          controller: 'gregCtrl as gregCtrl'
         })
         .state('research.programming', {
           url: '/programming',
-          templateUrl: 'partials/programming.html'
+          templateUrl: 'partials/programming.html',
+          controller: 'gregCtrl as gregCtrl'
         })
         .state('publications',{
           url: '/publications',
-          templateUrl: 'partials/publications.html'
+          templateUrl: 'partials/publications.html',
+          controller: 'gregCtrl as gregCtrl'
         })
         .state('experience',{
           url: '/experience',
@@ -80,8 +93,9 @@
         })
         .state('contact',{
           url: '/contact',
-          templateUrl: 'partials/contact.html'
-        })
-      $urlRouterProvider.otherwise('/')
-    }
-}())
+          templateUrl: 'partials/contact.html',
+          controller: 'gregCtrl as gregCtrl'
+        });
+      $urlRouterProvider.otherwise('/');
+    };
+}());
