@@ -1,0 +1,70 @@
+<div>
+  <div class="parallax-container">
+      <div class="parallax">
+          <img src="./images/field-lucas-small.jpg">
+      </div>
+  </div>
+
+  <div class="container">
+      <div class="section">
+        <div class="row center">
+          <h2 id="name" class="header col s12 red-text text-darken-4">Greg M. Lucas</h2>
+          <h5 class="header col s12 brown-text text-darken-2">Engineer / Scientist</h5>
+          <p class="light left-align">Greg is a current PhD student in aerospace engineering sciences at the University of Colorado working with professor <span><a  href="http://www.colorado.edu/aerospace/jeffrey-thayer" class="red-text text-darken-4">Jeffrey Thayer</a></span>. Greg's research focuses on blending engineering and fundamental science objectives together by utilizing satellite and ground based instrumentation and their data products. When not in the lab, Greg spends his time enjoying the numerous outdoor activities Colorado has to offer.</p>
+        </div>
+      </div>
+  </div>
+</div>
+
+<div class="wide-container">
+    <div class="section">
+
+        <div class="row">
+            <div class="col s12 m4">
+                <div class="icon-block center-align">
+                    <img src="./images/lightning_boulder_square.jpg" class="circle circle-image">
+                    <h5 class="center brown-text text-darken-2">Global Electric Circuit</h5>
+
+                    <p class="light left-align">The Global Electric Circuit involves the investigation of global variations in atmospheric currents and electric fields created by the distribution of thunderstorms. These electrical pathways can be measured to obtain an understanding of different atmospheric parameters. Greg has created a new Global Electric Circuit model for use within large scale climate models.</p>
+
+                    <div class="card-action left-align">
+                      <a ui-sref="research" class="red-text text-darken-4">Continue Reading</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col s12 m4">
+                <div class="icon-block center-align">
+                    <img src="./images/science_technology_square.jpg" class="circle circle-image">
+                    <h5 class="center brown-text text-darken-2">Computational Modeling</h5>
+
+                    <p class="light left-align">Greg's expertise has evolved around his knowledge and enjoyment with computers, where he has developed several new codes and modified many large codes in several different scientific fields. Most of his development is done in Python and Fortran, focusing on simplicity and fast numerical methods.</p>
+
+                    <div class="card-action left-align">
+                      <a ui-sref="research.programming" class="red-text text-darken-4">Continue Reading</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col s12 m4">
+                <div class="icon-block center-align">
+                    <img src="./images/mars_science_lab_square.jpg" class="circle circle-image">
+                    <h5 class="center brown-text text-darken-2">Nuclear Risk Assessment</h5>
+
+                    <p class="light left-align">Upon completion of his Masters Degree, Greg worked at Sandia National Laboratories on a space nuclear risk analysis team. His responsibilities involved numeric modeling of accident scenarios and probabilities to assess the risk of launching nuclear material into space. Greg's primary mission was risk assessment of the Mars Science Laboratory, which carried a radioisotope power system onboard.</p>
+
+                    <div class="card-action left-align">
+                      <a ui-sref="experience" class="red-text text-darken-4">Continue Reading</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+  $(document).ready(function(){
+    $('.parallax').parallax()
+  })
+</script>

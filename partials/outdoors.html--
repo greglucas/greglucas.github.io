@@ -1,0 +1,78 @@
+<div class="container">
+  <div class="section">
+    <div class="row center">
+
+      <h2 id="name" class="header col s12 red-text text-darken-4">Outdoor Activities</h2>
+
+      <h5 class="header col s12 brown-text text-darken-2"  id="outdoors-sub-header">Running | Biking | Climbing</h5>
+
+      <p class="light left-align">When not working, Greg is outdoors as much as possible. This includes being involved in almost any activity you can think of. Taking the time to enjoy nature allows for better concentration and the ability to work harder at school, while having an intellectually stimulating job also improves outdoor abilities.</p>
+
+      <p class="light left-align">Greg grew up playing many different sports but focused mainly on soccer. Since then, he has played soccer in men's leagues and has started playing Ultimate Frisbee to keep his competitive drive satisfied. Running is one of his greatest passions and in that pursuit he has run three marathons and paced friends at ultramarathons.</p>
+
+      <div class="card outdoors-card-1">
+        <div class="card-image outdoors-imgs">
+          <img src="./images/outdoors-img-2.jpg">
+          <span class="card-title" id="card-title">Trail Running</span>
+        </div>
+        <div class="card-content">
+          <p class="light left-align">While working at Sandia, Greg had a great group of coworkers to go on a run with everyday over lunch. The picture above was when several of them decided to run the Maroon Bells Four Pass Loop. The picture below is of Greg with a coworker whom he paced during her 100-mile ultramarathon.</p>
+        </div>
+        <div class="card-image outdoors-imgs">
+          <img src="./images/outdoors-img-3.jpg">
+        </div>
+      </div>
+
+      <div class="card outdoors-card-2">
+        <div class="card-image outdoors-imgs">
+          <img src="./images/outdoors-img-4.jpg">
+          <span class="card-title" id="card-title">Rock Climbing</span>
+        </div>
+        <div class="card-content">
+          <p class="light left-align">Greg has been fortunate enough to travel all over the United States and even a little abroad to sample a wide variety of climbing styles and objectives. His favorite national park is Yosemite, where he sampled some of the best climbs in Tuolumne Meadows. Here he is climbing "On the Lamb", a horizontal crack for four pitches.</p>
+        </div>
+      </div>
+
+      <div class="card outdoors-card-3">
+        <div class="card-image outdoors-imgs">
+          <img src="./images/outdoors-img-5.jpg">
+          <span class="card-title" id="card-title">Boulder</span>
+        </div>
+        <div class="card-content">
+          <p class="light left-align">Greg loves living in Boulder, CO where the climate allows for climbing and biking all year long. Above is a nice scramble on the iconic flatirons that are right above Boulder. Below is a quick single track loop that Greg rides to and from his house. Most evenings he'll be doing one of these activities around town.</p>
+        </div>
+        <div class="card-image outdoors-imgs">
+          <img src="./images/outdoors-img-6.jpg">
+        </div>
+      </div>
+
+      <hr>
+      <h5 class="header col s12 brown-text text-darken-2">Other Fun Activities</h5>
+
+      <div class="card outdoors-card-4">
+        <div class="card-image outdoors-imgs-small">
+          <img src="./images/outdoors-img-7.jpg">
+        </div>
+      </div>
+
+      <div class="card outdoors-card-5">
+        <div class="card-image outdoors-imgs-small">
+          <img src="./images/outdoors-img-8.jpg">
+        </div>
+      </div>
+
+      <div class="card outdoors-card-6">
+        <div class="card-image outdoors-imgs-small">
+          <img src="./images/outdoors-img-9.jpg">
+        </div>
+      </div>
+
+      <div class="card outdoors-card-7">
+        <div class="card-image outdoors-imgs-small">
+          <img src="./images/outdoors-img-10.jpg">
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

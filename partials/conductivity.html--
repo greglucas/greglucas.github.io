@@ -1,6 +1,6 @@
   <div class="center">
     <h5 class="header col s12 brown-text text-darken-2">Conductivity</h5>
-    <img id="gec-img-2" class="materialboxed" src="./images/GEC1.png">
+    <img id="gec-img-2" class="materialboxed" src="http://ccar.colorado.edu/glucas/images/GEC1.png">
     <p class="light left-align">WACCM-GEC uses the methodology outlined in <span><a href="http://onlinelibrary.wiley.com/doi/10.1002/jgrd.50725/pdf" class="red-text text-darken-4">Baumgaertner's 2013 paper</a></span> to generate the production and loss of ions, which includes radon, galactic cosmic rays, and solar proton events, to determine atmospheric conductivity. <span><a href="http://www.atmos-chem-phys.net/14/8599/2014/acp-14-8599-2014.pdf" class="red-text text-darken-4">Baumgaertner's 2014 paper</a></span> is used to more accurately model the loss of ions due to their attachment to water droplets within clouds. With the conductivity known everywhere within the atmosphere, one can determine the total resistance of the atmosphere as seen in the figure above.</p>
   </div>
 

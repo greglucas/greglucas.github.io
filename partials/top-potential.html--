@@ -1,6 +1,6 @@
 <div class="center">
   <h5 class="header col s12 brown-text text-darken-2">Top Potential</h5>
-  <img id="gec-img-4" class="materialboxed" src="./images/GEC3.png">
+  <img id="gec-img-4" class="materialboxed" src="http://ccar.colorado.edu/glucas/images/GEC3.png">
   <p class="light left-align">To get the global signature for the GEC, the total current flowing in the domain and the total resistance are used to set the highly conductive ionosphere to a different potential from the surface of the earth. This results in a potential difference (PD) that varies depending on the conductivity and source distributions within the domain.</p>
 </div>
 
