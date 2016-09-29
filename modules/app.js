@@ -12,11 +12,6 @@
         $('.parallax').parallax();
       };
 
-      gregCtrl.materialbox = function () {
-        // AJAX call for materialbox function
-        $('.materialboxed').materialbox();
-      };
-
       gregCtrl.accordion = function () {
         // AJAX call for accordion function
         $('.collapsible').collapsible({

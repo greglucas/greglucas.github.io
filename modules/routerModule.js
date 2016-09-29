@@ -89,7 +89,8 @@
         })
         .state('outdoors',{
           url: '/outdoors',
-          templateUrl: 'partials/outdoors.html'
+          templateUrl: 'partials/outdoors.html',
+          controller: 'gregCtrl as gregCtrl'
         })
         .state('contact',{
           url: '/contact',
