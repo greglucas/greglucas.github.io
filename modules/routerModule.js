@@ -8,9 +8,11 @@
 
     .config(configRouter);
 
-    configRouter.$inject = ['$stateProvider', '$urlRouterProvider'];
+    configRouter.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider'];
 
-    function configRouter($stateProvider, $urlRouterProvider){
+    function configRouter($stateProvider, $urlRouterProvider, $locationProvider){
+      // Setting html5Mode as true to remove hashtag
+      $locationProvider.html5Mode(true);
       $stateProvider
         .state('home',{
           url: '/',
