@@ -35,14 +35,16 @@
     ga('create', 'UA-41009308-1', 'auto');
 
     // Replace the following lines with the plugins you want to use.
-    ga('require', 'eventTracker');
-    ga('require', 'outboundLinkTracker');
-    ga('require', 'urlChangeTracker');
+    //ga('require', 'eventTracker');
+    //ga('require', 'outboundLinkTracker');
+    //ga('require', 'urlChangeTracker');
+    // Load everything
+    ga('require', 'autotrack');
 
     ga('send', 'pageview');
     </script>
     <script async src='https://www.google-analytics.com/analytics.js'></script>
-    <script async src='analytics/autotrack/autotrack.js'></script>
+    <script async src='analytics/autotrack.js'></script>
     <!-- End Google Analytics Code for SPAs -->
 
 </head>
