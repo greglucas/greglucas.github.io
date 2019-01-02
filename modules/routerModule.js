@@ -1,12 +1,21 @@
 //IIFE FOR VARIABLE ENCAPSULATION
 (function() {
   angular.module('routerModule', ['ui.router'])
-
-    .run(function ($state,$rootScope) {
-      $rootScope.$state = $state
-    })
-
+    .run(runRouter)
     .config(configRouter);
+
+    runRouter.$inject = ['$state', '$rootScope', '$location', '$window']
+    function runRouter($state, $rootScope, $location, $window) {
+      $rootScope.$state = $state
+
+      // initialise google analytics
+      // $window.ga('create', 'UA-112831235-1', 'auto');
+      
+      // track pageview on state change
+      $rootScope.$on('$stateChangeSuccess', function (event) {
+          $window.ga('send', 'pageview', $location.path());
+      });
+    };
 
     configRouter.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider'];
 
