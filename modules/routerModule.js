@@ -33,23 +33,15 @@
           templateUrl: 'partials/research.html',
           controller: 'gregCtrl as gregCtrl'
         })
-        .state('research.gec-overview',{
-          url: '/gec-overview',
-          templateUrl: 'partials/gec-overview.html',
-          controller: 'gregCtrl as gregCtrl'
-        })
         .state('research.gec',{
           url: '/GEC',
-          views: {
-            "": {
-              templateUrl: 'partials/gec.html',
-              controller: 'gregCtrl as gregCtrl'
-            },
-            "waccm-gec@research.gec": {
-              templateUrl: 'partials/waccm-gec.html',
-              controller: 'gregCtrl as gregCtrl'
-            }
-          }
+          templateUrl: 'partials/gec.html',
+          controller: 'gregCtrl as gregCtrl'
+        })
+        .state('research.gec.waccm-gec', {
+          url: '/waccm-gec',
+          templateUrl: 'partials/waccm-gec.html',
+          controller: 'gregCtrl as gregCtrl'
         })
         .state('research.gec.conductivity', {
           url: '/conductivity',
