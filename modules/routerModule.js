@@ -30,16 +30,8 @@
         })
         .state('research',{
           url: '/research',
-          views: {
-            "": {
-              templateUrl: 'partials/research.html',
-              controller: 'gregCtrl as gregCtrl'
-            },
-            "overview@research": {
-              templateUrl: 'partials/overview.html',
-              controller: 'gregCtrl as gregCtrl'
-            }
-          }
+          templateUrl: 'partials/research.html',
+          controller: 'gregCtrl as gregCtrl'
         })
         .state('research.gec-overview',{
           url: '/gec-overview',

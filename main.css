@@ -134,6 +134,9 @@ main {
 
 .chip a{
   vertical-align: top;
+  display: flex;
+  justify-content: space-between;
+  width: 133px;
 }
 
 .linkedin-button {
