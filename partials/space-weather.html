@@ -1,0 +1,15 @@
+<div class="center">  
+    <h5 class="header col s12 brown-text text-darken-2">Space Weather Model Staging Platform</h5>
+    <p class="light left-align">
+      Greg's current programming work involves creating a Model Staging Platform on public cloud architectures to lower the barrier to entry for running research code and getting the cutting edge research into operational centers sooner. An example of this is developing a web interface to an empirical Fortran model so that anyone can interact with the model through a browser without having to worry about compilers or how to run the code. The project involved creating a Python wrapper around the Fortran code (<a href="https://swxtrec.github.io/pymsis/examples/index.html" class="red-text text-darken-4">pymsis</a>) and setting up a serverless application (<a href="https://github.com/SWxTREC/msis-api" class="red-text text-darken-4">msis-api</a>) to call the Fortran code with a web API. The end product is the <a href="https://swxtrec.github.io/msis/visualizer" class="red-text text-darken-4">MSIS Visualizer</a> website that was created with Javascript's d3 library to plot surface geographic fields and altitude profiles of atmospheric constituents depending on the space weather drivers.
+    </p>
+    <p>
+      Some other projects that have followed a similar architecture are: <a href="https://swxtrec.github.io/vector/calculator" class="red-text text-darken-4">VECTOR</a>, a satellite drag calculator that enables users to upload a satellite design and choose the orientation and atmospheric conditions to provide a detailed assessment of drag on the vehicle; <a href="https://github.com/SWxTREC/enlilviz" class="red-text text-darken-4">enlilviz</a>, a solar wind visualization program in Python to produce animations and interactive plots for Space Weather Forecasters to use in their operational environments.
+    </p>
+    
+    <h5 class="header col s12 brown-text text-darken-2">Space Weather Research</h5>
+    <p>
+      In addition to developing tools for others in the community, Greg also continues to advance the state of the art research in applied machine learning techniques to the spatial and temporal interpolation of magnetic fields. For these techniques he wrote a Spherical Elementary Current System code (<a href="https://github.com/greglucas/pysecs" class="red-text text-darken-4">pysecs</a>) to reduce the problem to a set of divergence-free basis functions, which ensures the underlying physical constraints and properties are maintained while interpolating. He and his colleagues then trained a deep neural network to fit these basis functions using synthetic observations from expensive HPC models that can't be run in real-time. This technique of reducing the dimensionality with physical basis functions and training with large-scale HPC models has shown promise for creating more realistic magnetic field interpolations across North America (<a href="https://www.essoar.org/doi/abs/10.1002/essoar.10500173.1" class="red-text text-darken-4">poster link</a>).
+    </p>
+  </div>
+  

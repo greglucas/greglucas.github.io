@@ -2,6 +2,7 @@
   <div class="row center gec-nav">
     <div id="gec-breadcrumb-nav">
       <ul class="col s12">
+        <li><a ui-sref=".waccm-gec" class="gec btn brown darken-2">Model</a></li>
         <li><a ui-sref=".conductivity" class="gec btn brown darken-2">Conductivity</a></li>
         <li><a ui-sref=".sources" class="gec btn brown darken-2">Sources</a></li>
         <li><a ui-sref=".top-potential" class="gec btn brown darken-2">Top Potential</a></li>
@@ -13,7 +14,7 @@
 </div>
 
 <div data-ng-if="$state.is('research.gec')">
-  <div ui-view="waccm-gec"></div>
+  <div ui-view="gec-overview"></div>
 </div>
 
 <div ui-view></div>

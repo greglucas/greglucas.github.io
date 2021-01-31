@@ -41,9 +41,9 @@
             }
           }
         })
-        .state('research.overview',{
-          url: '/overview',
-          templateUrl: 'partials/overview.html',
+        .state('research.gec-overview',{
+          url: '/gec-overview',
+          templateUrl: 'partials/gec-overview.html',
           controller: 'gregCtrl as gregCtrl'
         })
         .state('research.gec',{
@@ -84,9 +84,14 @@
           templateUrl: 'partials/results.html',
           controller: 'gregCtrl as gregCtrl'
         })
-        .state('research.programming', {
-          url: '/programming',
-          templateUrl: 'partials/programming.html',
+        .state('research.geoelectric', {
+          url: '/geoelectric',
+          templateUrl: 'partials/geoelectric.html',
+          controller: 'gregCtrl as gregCtrl'
+        })
+        .state('research.space-weather', {
+          url: '/space-weather',
+          templateUrl: 'partials/space-weather.html',
           controller: 'gregCtrl as gregCtrl'
         })
         .state('publications',{

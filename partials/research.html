@@ -8,10 +8,10 @@
 
     <div id="gec-breadcrumb-nav">
       <div>
-        <ul class="col s12">
-          <li><a ui-sref=".overview" class="research-btns btn red darken-4">Overview</a></li>
-          <li><a ui-sref=".gec" class="research-btns btn red darken-4">WACCM-GEC</a></li>
-          <li><a ui-sref=".programming" class="research-btns btn red darken-4">Programming</a></li>
+        <ul class="col s12 center">
+          <li><a ui-sref=".geoelectric" class="research-btns btn red darken-4">Geoelectric Hazards</a></li>
+          <li><a ui-sref=".gec" class="research-btns btn red darken-4">Global Electric Circuit</a></li>
+          <li><a ui-sref=".space-weather" class="research-btns btn red darken-4">Space Weather</a></li>
         </ul>
       </div>
     </div>
@@ -19,7 +19,17 @@
     <hr id="hr-research-2">
 
     <div data-ng-if="$state.is('research')">
-      <div ui-view="overview"></div>
+      <div class="center">
+        <p class="light left-align">One of Greg's passions ever since he was young has been working with computers. He
+          began programming in Perl and has since expanded into many other languages including C, C++, Java, Fortran,
+          and his current workhorse, Python. Greg utilizes many of these languages to assist him in his research, as
+          well as in his hobbies. All of his projects and code are available upon request, and many of them are located
+          in his <span><a href="https://github.com/greglucas" class="red-text text-darken-4">github
+              repository</a></span>. He regularly contributes to open source projects and is currently one of the
+          maintainers of <a href="https://github.com/scitools/cartopy" class="red-text text-darken-4">Cartopy</a> a
+          geographic plotting library in Python.
+        </p>
+      </div>
     </div>
 
     <div ui-view></div>
