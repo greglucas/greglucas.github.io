@@ -8,12 +8,17 @@
     function runRouter($state, $rootScope, $location, $window) {
       $rootScope.$state = $state
 
-      // initialise google analytics
-      // $window.ga('create', 'UA-112831235-1', 'auto');
-      
-      // track pageview on state change
-      $rootScope.$on('$stateChangeSuccess', function (event) {
-          $window.ga('send', 'pageview', $location.path());
+      // Track pageview on state change. The site uses gtag.js (GA4), loaded in
+      // index.html; the old analytics.js `ga` object never existed here, so this
+      // previously threw on every navigation and no route change was ever recorded.
+      $rootScope.$on('$stateChangeSuccess', function () {
+          if (typeof $window.gtag === 'function') {
+            $window.gtag('event', 'page_view', {
+              page_path: $location.path(),
+              page_location: $window.location.href,
+              page_title: $window.document.title
+            });
+          }
       });
     };
 
