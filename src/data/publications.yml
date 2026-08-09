@@ -42,6 +42,8 @@
   issue: 1
   pages: 525-557
   doi: 10.1146/annurev-earth-032524-012356
+  featured: 5
+  impact: "An invited Annual Reviews article surveying the whole field of magnetic storms and geoelectric hazards. It has no citations yet because it is brand new, but being asked to write the review is the field's way of saying this is settled expertise."
   citations: 0
   citations_updated: 2026-08-09
 
@@ -189,6 +191,8 @@
   volume: 21
   issue: 3
   doi: 10.1029/2022SW003330
+  featured: 4
+  impact: "The most-cited paper I have contributed to. A modest geomagnetic storm expanded the thermosphere enough to bring down 38 newly launched Starlink satellites, and this analysis turned that loss into the reference case for how space weather threatens low Earth orbit operations."
   citations: 71
   citations_updated: 2026-08-09
 
@@ -307,6 +311,8 @@
   volume: 18
   issue: 2
   doi: 10.1029/2019SW002329
+  featured: 1
+  impact: "My signature first-author result: the first nationwide, 100-year extreme-value estimate of geoelectric hazard across the US high-voltage grid, built on realistic 3-D Earth conductivity rather than the uniform-Earth assumption the industry had relied on. Every figure ships as a runnable notebook, so the analysis can be checked rather than taken on faith."
   citations: 44
   citations_updated: 2026-08-09
 
@@ -354,6 +360,8 @@
   issue: 2
   pages: 185-195
   doi: 10.1002/2017SW001779
+  featured: 2
+  impact: "My most-cited first-author paper. It showed that using realistic Earth impedances instead of uniform ground changes computed transmission-line voltages during historic storms by enough to matter operationally, which reframed how induced voltages are estimated for real grid segments."
   citations: 62
   citations_updated: 2026-08-09
 
@@ -420,6 +428,8 @@
   issue: 23
   pages: 12054-12066
   doi: 10.1002/2015JD023562
+  featured: 3
+  impact: "The core of my PhD: WACCM-GEC, the first global electric circuit model solved inside a full community climate model, so atmospheric electricity responds to a physically realistic atmosphere instead of a prescribed one. Selected for a research spotlight in Eos."
   citations: 37
   citations_updated: 2026-08-09
 

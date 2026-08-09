@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import Publication from '../components/Publication.astro';
 import { PUB_TYPES } from '../content.config';
+import { assignCiteKeys, pubId } from '../lib/bibtex';
 
 const GROUPS: Record<(typeof PUB_TYPES)[number], string> = {
   journal: 'Peer-reviewed journal articles',
@@ -26,6 +27,10 @@ const groups = PUB_TYPES.map((type) => ({
   items: sorted.filter((p) => p.type === type),
 })).filter((g) => g.items.length > 0);
 
+// Cite keys must be unique across the whole list, so they are assigned once
+// here and handed to each entry rather than derived per-entry.
+const citeKeys = assignCiteKeys(sorted);
+
 const total = sorted.length;
 const totalCitations = sorted.reduce((sum, p) => sum + (p.citations ?? 0), 0);
 const firstAuthor = sorted.filter((p) => /^Lucas,/.test(p.authors[0])).length;
@@ -34,6 +39,59 @@ const lastUpdated = sorted
   .filter(Boolean)
   .sort()
   .at(-1);
+
+const SITE = Astro.site?.href ?? 'https://greglucas.github.io/';
+
+/**
+ * Structured data describing each publication as a ScholarlyArticle, so search
+ * engines index them as papers rather than as a wall of text. Emitted as an
+ * ItemList to keep the page to a single JSON-LD block.
+ */
+const publicationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Publications of Greg M. Lucas',
+  numberOfItems: total,
+  itemListElement: sorted.map((p, i) => {
+    const article: Record<string, unknown> = {
+      '@type':
+        p.type === 'chapter'
+          ? 'Chapter'
+          : p.type === 'thesis'
+            ? 'Thesis'
+            : p.type === 'report'
+              ? 'Report'
+              : 'ScholarlyArticle',
+      name: p.title,
+      author: p.authors.map((a) => {
+        const [family, given] = a.split(',').map((s) => s.trim());
+        return { '@type': 'Person', familyName: family, givenName: given ?? undefined, name: a };
+      }),
+      datePublished: String(p.year),
+    };
+    if (p.doi) {
+      article.identifier = `https://doi.org/${p.doi}`;
+      article.sameAs = `https://doi.org/${p.doi}`;
+      article.url = `https://doi.org/${p.doi}`;
+    } else if (p.url) {
+      article.url = p.url;
+    }
+    if (p.venue) {
+      article.isPartOf = { '@type': 'Periodical', name: p.venue };
+    }
+    if (p.volume !== undefined) article.volumeNumber = String(p.volume);
+    if (p.issue !== undefined) article.issueNumber = String(p.issue);
+    if (p.pages) {
+      const [start, end] = p.pages.split('-');
+      article.pageStart = start;
+      if (end) article.pageEnd = end;
+    }
+    if (p.institution) {
+      article.publisher = { '@type': 'Organization', name: p.institution };
+    }
+    return { '@type': 'ListItem', position: i + 1, item: article };
+  }),
+};
 ---
 
 <Base
@@ -77,6 +135,9 @@ const lastUpdated = sorted
       <a class="btn btn-ghost" href="https://orcid.org/0000-0003-1331-1863" rel="noopener">
         ORCID 0000-0003-1331-1863
       </a>
+      <a class="btn btn-ghost" href="/publications.bib" download="lucas-publications.bib">
+        Download all as BibTeX
+      </a>
     </div>
 
     <nav class="jump" aria-label="Publication sections">
@@ -91,7 +152,7 @@ const lastUpdated = sorted
           </h2>
           <ul class="pub-list">
             {g.items.map((pub) => (
-              <Publication pub={pub} />
+              <Publication pub={pub} citeKey={citeKeys.get(pubId(pub))} />
             ))}
           </ul>
         </section>
@@ -108,6 +169,37 @@ const lastUpdated = sorted
       )
     }
   </div>
+
+  <script is:inline set:html={JSON.stringify(publicationSchema)} type="application/ld+json" />
+
+  <script is:inline>
+    // One delegated listener rather than 44 inline handlers.
+    document.addEventListener('click', async (event) => {
+      const button = event.target.closest('.copy-bib');
+      if (!button) return;
+
+      const original = button.textContent;
+      try {
+        await navigator.clipboard.writeText(button.dataset.bib);
+        button.textContent = 'Copied';
+      } catch {
+        // Clipboard API needs a secure context and permission; if it is
+        // refused, select the text so the reader can copy it themselves.
+        const code = button.parentElement.querySelector('code');
+        if (code) {
+          const range = document.createRange();
+          range.selectNodeContents(code);
+          const sel = window.getSelection();
+          sel.removeAllRanges();
+          sel.addRange(range);
+        }
+        button.textContent = 'Press Ctrl/Cmd+C';
+      }
+      setTimeout(() => {
+        button.textContent = original;
+      }, 2000);
+    });
+  </script>
 </Base>
 
 <style>

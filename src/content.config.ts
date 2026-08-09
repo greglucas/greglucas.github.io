@@ -76,12 +76,26 @@ const publications = defineCollection({
       .optional(),
 
     /**
+     * Rank on the home page's selected-work list. Lower sorts first. Omit for
+     * everything that is not featured.
+     */
+    featured: z.number().int().min(1).max(99).optional(),
+    /** Why this one matters. Required whenever `featured` is set. */
+    impact: z.string().min(1).optional(),
+
+    /**
      * Citation count. Refreshed automatically from OpenAlex by
      * scripts/update_citations.py — do not edit by hand.
      */
     citations: z.number().int().nonnegative().optional(),
     citations_updated: z.string().optional(),
-  }),
+  })
+    // A featured entry with no explanation would render an empty card, so make
+    // the pair inseparable rather than discovering it in the browser.
+    .refine((p) => p.featured === undefined || !!p.impact, {
+      message: 'A featured publication must also set `impact` explaining why it is featured.',
+      path: ['impact'],
+    }),
 });
 
 export const collections = { publications };

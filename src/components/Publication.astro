@@ -1,11 +1,15 @@
 ---
 import type { CollectionEntry } from 'astro:content';
+import { toBibtex } from '../lib/bibtex';
 
 interface Props {
   pub: CollectionEntry<'publications'>['data'];
+  /** Unique cite key, assigned across the whole list by the parent page. */
+  citeKey?: string;
 }
 
-const { pub } = Astro.props;
+const { pub, citeKey } = Astro.props;
+const bibtex = toBibtex(pub, citeKey);
 
 const href = pub.doi ? `https://doi.org/${pub.doi}` : pub.url;
 
@@ -50,6 +54,12 @@ if (pub.number) detailParts.push(pub.number);
     <span class="year">({pub.year}).</span>{' '}
     {detailParts.length > 0 && <span class="detail">{detailParts.join(', ')}.</span>}
   </p>
+
+  <details class="cite">
+    <summary>Cite</summary>
+    <pre><code>{bibtex}</code></pre>
+    <button type="button" class="copy-bib" data-bib={bibtex}>Copy BibTeX</button>
+  </details>
 
   {
     (pub.links?.length || pub.doi || typeof pub.citations === 'number') && (
@@ -120,6 +130,70 @@ if (pub.number) detailParts.push(pub.number);
 
   .detail {
     font-style: italic;
+  }
+
+  .cite {
+    margin-top: 0.6rem;
+  }
+
+  .cite summary {
+    display: inline-block;
+    padding: 0.12rem 0.55rem;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--bg-subtle);
+    font-size: 0.75rem;
+    font-weight: 550;
+    color: var(--text-faint);
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+  }
+
+  .cite summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .cite summary:hover,
+  .cite[open] summary {
+    color: var(--brand);
+    border-color: var(--brand);
+  }
+
+  .cite pre {
+    margin: 0.6rem 0 0.5rem;
+    padding: 0.85rem 1rem;
+    background: var(--bg-subtle);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow-x: auto;
+    font-size: 0.8125rem;
+    line-height: 1.5;
+  }
+
+  .cite code {
+    background: none;
+    border: 0;
+    padding: 0;
+    font-family: var(--font-mono);
+    white-space: pre;
+  }
+
+  .copy-bib {
+    padding: 0.3rem 0.8rem;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--bg-raised);
+    color: var(--text-muted);
+    font: inherit;
+    font-size: 0.8125rem;
+    font-weight: 550;
+    cursor: pointer;
+  }
+
+  .copy-bib:hover {
+    color: var(--brand);
+    border-color: var(--brand);
   }
 
   .tags {

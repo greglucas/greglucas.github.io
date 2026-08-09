@@ -5,6 +5,11 @@ import { getCollection } from 'astro:content';
 const pubs = await getCollection('publications');
 const pubCount = pubs.length;
 
+const featured = pubs
+  .map((e) => e.data)
+  .filter((p) => p.featured !== undefined)
+  .sort((a, b) => (a.featured ?? 99) - (b.featured ?? 99));
+
 const highlights = [
   {
     title: 'Space weather & ground software',
@@ -105,6 +110,48 @@ const highlights = [
         }
       </div>
     </section>
+
+    {
+      featured.length > 0 && (
+        <section class="selected">
+          <div class="selected-head">
+            <h2>Selected work</h2>
+            <p>
+              Five of {pubCount} publications, and why these are the ones worth reading first.
+            </p>
+          </div>
+
+          <ol class="selected-list">
+            {featured.map((p) => (
+              <li>
+                <p class="sel-title">
+                  {p.doi || p.url ? (
+                    <a href={p.doi ? `https://doi.org/${p.doi}` : p.url} rel="noopener">
+                      {p.title}
+                    </a>
+                  ) : (
+                    p.title
+                  )}
+                </p>
+                <p class="sel-meta">
+                  {p.venue}
+                  {p.venue && ', '}
+                  {p.year}
+                  {typeof p.citations === 'number' && p.citations > 0 && (
+                    <span class="sel-cites">Cited by {p.citations}</span>
+                  )}
+                </p>
+                <p class="sel-impact">{p.impact}</p>
+              </li>
+            ))}
+          </ol>
+
+          <a class="btn btn-ghost" href="/publications">
+            All {pubCount} publications
+          </a>
+        </section>
+      )
+    }
   </div>
 </Base>
 
@@ -171,5 +218,92 @@ const highlights = [
     border-radius: var(--radius);
     margin: -0.35rem 0 0.5rem;
     background: var(--bg-subtle);
+  }
+
+  .selected {
+    margin-top: 4.5rem;
+  }
+
+  .selected-head h2 {
+    padding-bottom: 0.6rem;
+    border-bottom: 2px solid var(--brand);
+  }
+
+  .selected-head p {
+    margin-top: 0.75rem;
+    color: var(--text-muted);
+    max-width: var(--measure);
+  }
+
+  .selected-list {
+    list-style: none;
+    counter-reset: sel;
+    padding: 0;
+    margin: 2rem 0;
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .selected-list li {
+    counter-increment: sel;
+    position: relative;
+    padding-left: 3rem;
+  }
+
+  .selected-list li::before {
+    content: counter(sel);
+    position: absolute;
+    left: 0;
+    top: -0.15rem;
+    display: grid;
+    place-items: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--brand) 12%, transparent);
+    color: var(--brand);
+    font-size: 0.875rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .sel-title {
+    font-weight: 600;
+    line-height: 1.4;
+  }
+
+  .sel-title a {
+    text-decoration: none;
+  }
+
+  .sel-title a:hover {
+    text-decoration: underline;
+  }
+
+  .sel-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0.2rem 0 0.5rem;
+    font-size: 0.875rem;
+    font-style: italic;
+    color: var(--text-faint);
+  }
+
+  .sel-cites {
+    font-style: normal;
+    padding: 0.05rem 0.5rem;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--brand) 9%, transparent);
+    border: 1px solid color-mix(in srgb, var(--brand) 25%, transparent);
+    color: var(--brand);
+    font-size: 0.75rem;
+    font-weight: 550;
+  }
+
+  .sel-impact {
+    color: var(--text-muted);
+    max-width: 68ch;
   }
 </style>
