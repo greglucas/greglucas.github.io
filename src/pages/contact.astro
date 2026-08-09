@@ -1,0 +1,95 @@
+---
+import Base from '../layouts/Base.astro';
+
+const links = [
+  {
+    label: 'Email',
+    value: 'greg.m.lucas@gmail.com',
+    href: 'mailto:greg.m.lucas@gmail.com',
+  },
+  {
+    label: 'GitHub',
+    value: 'github.com/greglucas',
+    href: 'https://github.com/greglucas',
+  },
+  {
+    label: 'LinkedIn',
+    value: 'greg-lucas-phd',
+    href: 'https://www.linkedin.com/in/greg-lucas-phd/',
+  },
+  {
+    label: 'Google Scholar',
+    value: 'Publications and citations',
+    href: 'https://scholar.google.com/citations?user=0CWZSCUAAAAJ',
+  },
+  {
+    label: 'ORCID',
+    value: '0000-0003-1331-1863',
+    href: 'https://orcid.org/0000-0003-1331-1863',
+  },
+];
+---
+
+<Base
+  title="Contact"
+  description="Get in touch with Greg M. Lucas by email, or find him on GitHub, LinkedIn, Google Scholar and ORCID."
+>
+  <div class="page">
+    <div class="section-head">
+      <h1>Contact</h1>
+      <p class="lede">
+        Email is the surest way to reach me. I am happy to talk about space weather, scientific
+        software, or getting research code into production.
+      </p>
+    </div>
+
+    <ul class="links">
+      {
+        links.map((l) => (
+          <li>
+            <span class="label">{l.label}</span>
+            <a href={l.href} rel={l.href.startsWith('http') ? 'me noopener' : undefined}>
+              {l.value}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</Base>
+
+<style>
+  .links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-width: 34rem;
+  }
+
+  .links li {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.25rem 1.5rem;
+    padding: 0.9rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    align-self: center;
+  }
+
+  .links a {
+    font-weight: 550;
+    text-decoration: none;
+  }
+
+  .links a:hover {
+    text-decoration: underline;
+  }
+</style>

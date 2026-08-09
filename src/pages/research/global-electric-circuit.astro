@@ -1,0 +1,202 @@
+---
+import Base from '../../layouts/Base.astro';
+
+const sections = [
+  { id: 'model', label: 'The model' },
+  { id: 'conductivity', label: 'Conductivity' },
+  { id: 'sources', label: 'Sources' },
+  { id: 'top-potential', label: 'Top potential' },
+  { id: 'magnetospheric-currents', label: 'Magnetospheric currents' },
+  { id: 'results', label: 'Results' },
+];
+---
+
+<Base
+  title="Global electric circuit"
+  description="WACCM-GEC: a physics-based model of the atmospheric global electric circuit built inside the Whole Atmosphere Community Climate Model, covering conductivity, thunderstorm sources, ionospheric potential and magnetospheric coupling."
+  image="/images/GEC_all.png"
+>
+  <div class="page">
+    <div class="section-head">
+      <p class="crumb"><a href="/research">Research</a></p>
+      <h1>Global electric circuit</h1>
+      <p class="lede">
+        The atmosphere behaves like a leaky capacitor, with the ground and the ionosphere as its two
+        plates and thunderstorms as the battery. My PhD built a model of that circuit inside a
+        full community climate model.
+      </p>
+    </div>
+
+    <figure class="hero-figure">
+      <img
+        src="/images/lightning_boulder_square.jpg"
+        alt="A lightning strike over Boulder, Colorado at night"
+        width="1200"
+        height="800"
+        loading="eager"
+      />
+      <figcaption>
+        Thunderstorms are the battery of the global electric circuit, driving current up to the
+        ionosphere and back down through the fair-weather atmosphere everywhere else.
+      </figcaption>
+    </figure>
+
+    <nav class="toc" aria-label="Sections on this page">
+      {sections.map((s) => <a href={`#${s.id}`}>{s.label}</a>)}
+    </nav>
+
+    <div class="prose stack">
+      <p>
+        The global electric circuit (GEC) investigates the electrical connections within Earth's
+        atmosphere. Its responses split into two regimes: strongly time-dependent AC behaviour —
+        lightning, transient luminous events, and the VLF and ELF signals they radiate — and the
+        slowly varying DC behaviour that my research addresses, where the atmosphere acts as that
+        leaky capacitor.
+      </p>
+      <p>
+        To model how clouds affect the electrical response of the system, I used a finite element
+        package to simulate a range of cloud parameters; that work appears in
+        <a href="https://doi.org/10.5194/acp-14-8599-2014" rel="noopener">Atmospheric Chemistry and
+        Physics</a>.
+      </p>
+
+      <h2 id="model">WACCM-GEC: the model</h2>
+      <p>
+        Rather than prescribe an atmosphere, I incorporated the conductivity and source-current work
+        into the
+        <a href="https://www2.acom.ucar.edu/gcm/waccm" rel="noopener">Whole Atmosphere Community
+        Climate Model</a>. Letting a climate model solve the complex atmospheric forcing terms means
+        the GEC currents and electric fields can be solved on a genuinely realistic atmosphere. The
+        full description of this framework is published in
+        <a href="https://doi.org/10.1002/2015JD023562" rel="noopener">JGR: Atmospheres</a>, and the
+        work was selected for
+        <a href="https://eos.org/research-spotlights/considering-atmospheric-electricity-climate-models" rel="noopener">a
+        research spotlight in Eos</a>.
+      </p>
+
+      <figure>
+        <img
+          src="/images/GEC_all.png"
+          alt="Schematic of all processes represented in WACCM-GEC, including ion production and loss, electrified clouds, and current flow between surface and ionosphere"
+          width="1000"
+          height="700"
+          loading="lazy"
+        />
+        <figcaption>
+          Every process represented in WACCM-GEC: ion production and loss setting the conductivity,
+          electrified clouds driving current, and the resulting circulation between surface and
+          ionosphere.
+        </figcaption>
+      </figure>
+
+      <h2 id="conductivity">Conductivity</h2>
+      <p>
+        WACCM-GEC follows the methodology of
+        <a href="https://doi.org/10.1002/jgrd.50725" rel="noopener">Baumgaertner et al. (2013)</a> to
+        generate the production and loss of ions — radon, galactic cosmic rays and solar proton
+        events — which together determine atmospheric conductivity.
+        <a href="https://doi.org/10.5194/acp-14-8599-2014" rel="noopener">Baumgaertner et al.
+        (2014)</a> is used to model the loss of ions to attachment on water droplets inside clouds
+        more accurately. With conductivity known everywhere, the total resistance of the atmospheric
+        column follows.
+      </p>
+
+      <figure>
+        <img src="/images/GEC1.png" alt="Global map of modeled total atmospheric column resistance" width="1000" height="600" loading="lazy" />
+        <figcaption>Total atmospheric resistance, derived from the modeled conductivity field.</figcaption>
+      </figure>
+
+      <h2 id="sources">Sources</h2>
+      <p>
+        Current in the GEC originates in electrified clouds. The strength and location of those
+        storms is captured well by the updraft mass flux the climate model produces, which is used
+        to parameterize the total current in each atmospheric column — and from there, the total
+        current flowing through the whole domain.
+      </p>
+
+      <figure>
+        <img src="/images/GEC2.png" alt="Global distribution of modeled source current density from electrified clouds" width="1000" height="600" loading="lazy" />
+        <figcaption>Source current from electrified clouds, parameterized from updraft mass flux.</figcaption>
+      </figure>
+
+      <h2 id="top-potential">Top potential</h2>
+      <p>
+        The total current and total resistance together set the highly conductive ionosphere to a
+        different potential from Earth's surface. The resulting potential difference varies with the
+        conductivity and source distributions across the domain.
+      </p>
+
+      <figure>
+        <img src="/images/GEC3.png" alt="Global map of the modeled ionospheric potential difference relative to the surface" width="1000" height="600" loading="lazy" />
+        <figcaption>Ionospheric potential difference relative to the surface.</figcaption>
+      </figure>
+
+      <h2 id="magnetospheric-currents">Magnetospheric currents</h2>
+      <p>
+        Currents flowing in the ionosphere and magnetosphere are external to the GEC, but they
+        impose large-scale potential patterns on it — strongest at high latitudes near the
+        geomagnetic poles. WACCM-GEC modifies the potential difference above each column by these
+        magnetospheric perturbations self-consistently, so no leakage current flows between the two
+        systems. Once each column's potential difference is set, the current density and electric
+        field at every point in the atmosphere follow.
+      </p>
+
+      <figure>
+        <img src="/images/GEC4.png" alt="Global map showing high-latitude magnetospheric potential patterns imposed on the global electric circuit" width="1000" height="600" loading="lazy" />
+        <figcaption>
+          High-latitude magnetospheric potential patterns imposed on the circuit, applied without
+          leakage between the two current systems.
+        </figcaption>
+      </figure>
+
+      <h2 id="results">Results</h2>
+      <p>
+        These conductivity and source calculations produce fair-weather currents and electric
+        fields, and because the host is a community climate model, the surface electric field varies
+        realistically over time. Below, modeled surface electric fields at two Antarctic stations —
+        Vostok and Concordia — are compared against observations.
+      </p>
+
+      <figure>
+        <img
+          src="/images/WACCM-GEC_results.png"
+          alt="Time series comparing observed and WACCM-GEC modeled surface electric fields at Vostok and Concordia stations, showing a diurnal cycle with a phase offset between sites"
+          width="1000"
+          height="620"
+          loading="lazy"
+        />
+        <figcaption>
+          Observed (solid) versus WACCM-GEC modeled (dashed) surface electric fields at Vostok and
+          Concordia.
+        </figcaption>
+      </figure>
+
+      <p>
+        The model reproduces the diurnal signature in universal time and captures the distinct
+        phase offset between the two sites, which arises from the imposed high-latitude
+        magnetospheric potential pattern. Differences remain — notably the amplitude of the
+        deviations, which depends on source strength and is an ongoing area of investigation.
+        WACCM-GEC exists so the community can test coupling mechanisms between atmospheric
+        processes and the global electric circuit in a physics-based model that is open to everyone.
+      </p>
+
+      <p>
+        <a class="btn btn-ghost" href="/publications#journal">All publications</a>
+      </p>
+    </div>
+  </div>
+</Base>
+
+<style>
+  .hero-figure {
+    margin: 0 0 2.5rem;
+  }
+
+  .hero-figure img {
+    width: 100%;
+    max-height: 26rem;
+    object-fit: cover;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+  }
+</style>

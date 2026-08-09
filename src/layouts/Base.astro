@@ -1,0 +1,132 @@
+---
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  /** Path to a social-share image, relative to the site root. */
+  image?: string;
+  /** Set on pages that should not be indexed. */
+  noindex?: boolean;
+}
+
+const {
+  title,
+  description,
+  image = '/images/field-lucas-small.jpg',
+  noindex = false,
+} = Astro.props;
+
+const site = Astro.site ?? new URL('https://greglucas.github.io');
+const canonical = new URL(Astro.url.pathname.replace(/\/+$/, '') || '/', site);
+const ogImage = new URL(image, site);
+const fullTitle = title === 'Greg M. Lucas' ? title : `${title} | Greg M. Lucas`;
+
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Greg M. Lucas',
+  url: site.href,
+  image: ogImage.href,
+  jobTitle: 'Principal Ground Software Engineer',
+  worksFor: { '@type': 'Organization', name: 'Rocket Lab' },
+  alumniOf: [
+    { '@type': 'CollegeOrUniversity', name: 'University of Colorado Boulder' },
+    { '@type': 'CollegeOrUniversity', name: 'University of Wisconsin' },
+  ],
+  sameAs: [
+    'https://github.com/greglucas',
+    'https://orcid.org/0000-0003-1331-1863',
+    'https://scholar.google.com/citations?user=0CWZSCUAAAAJ',
+    'https://www.linkedin.com/in/greg-lucas-phd/',
+  ],
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {/* Square, padded from the 2.5:1 wordmark so the tab icon is not squashed. */}
+    <link rel="icon" href="/images/favicon.png" sizes="256x256" />
+    <link rel="apple-touch-icon" href="/images/favicon.png" />
+    <link rel="canonical" href={canonical.href} />
+
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content="Greg M. Lucas" />
+    {noindex && <meta name="robots" content="noindex" />}
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Greg M. Lucas" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical.href} />
+    <meta property="og:image" content={ogImage.href} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage.href} />
+
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <script is:inline set:html={JSON.stringify(personSchema)} type="application/ld+json" />
+
+    {/* Applied before first paint so the chosen theme never flashes. */}
+    <script is:inline>
+      (() => {
+        try {
+          const saved = localStorage.getItem('theme');
+          if (saved === 'dark' || saved === 'light') {
+            document.documentElement.dataset.theme = saved;
+          }
+        } catch {
+          /* localStorage unavailable (private mode); fall back to prefers-color-scheme */
+        }
+      })();
+    </script>
+
+    <!-- Google Analytics (GA4) -->
+    <script
+      is:inline
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-20V4RWK33Q"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+      gtag('config', 'G-20V4RWK33Q');
+    </script>
+  </head>
+
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <Nav />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+
+    <script is:inline>
+      document.getElementById('theme-toggle')?.addEventListener('click', () => {
+        const root = document.documentElement;
+        const isDark = root.dataset.theme
+          ? root.dataset.theme === 'dark'
+          : window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const next = isDark ? 'light' : 'dark';
+        root.dataset.theme = next;
+        try {
+          localStorage.setItem('theme', next);
+        } catch {
+          /* ignore */
+        }
+      });
+    </script>
+  </body>
+</html>

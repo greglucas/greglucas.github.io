@@ -1,0 +1,87 @@
+---
+import Base from '../../layouts/Base.astro';
+---
+
+<Base
+  title="Space weather modeling"
+  description="Operational space weather work by Greg M. Lucas: cloud-based model staging platforms, the MSIS visualizer and VECTOR drag calculator, and physics-constrained machine learning for magnetic field interpolation."
+>
+  <div class="page">
+    <div class="section-head">
+      <p class="crumb"><a href="/research">Research</a></p>
+      <h1>Space weather modeling</h1>
+      <p class="lede">
+        Research models are only useful once someone other than their author can run them. Much of
+        my work is about closing that gap.
+      </p>
+    </div>
+
+    <div class="prose stack">
+      <h2 id="staging">Model staging platform</h2>
+      <p>
+        A large part of my work has been building a model staging platform on public cloud
+        infrastructure, lowering the barrier to running research code and shortening the path from
+        cutting-edge research to operational forecasting centers.
+      </p>
+      <p>
+        The canonical example is an empirical Fortran atmospheric model that historically required
+        a compiler and local expertise to run. I wrapped it in Python as
+        <a href="https://swxtrec.github.io/pymsis/examples/index.html" rel="noopener">pymsis</a>,
+        exposed it through a serverless API
+        (<a href="https://github.com/SWxTREC/msis-api" rel="noopener">msis-api</a>), and built the
+        <a href="https://swxtrec.github.io/msis/visualizer" rel="noopener">MSIS Visualizer</a> on top
+        of it with d3, so anyone can explore surface fields and altitude profiles of atmospheric
+        constituents in a browser without installing anything.
+      </p>
+      <p>
+        Other projects follow the same architecture:
+        <a href="https://swxtrec.github.io/vector/calculator" rel="noopener">VECTOR</a>, a satellite
+        drag calculator where users upload a spacecraft design, choose orientation and atmospheric
+        conditions, and get a detailed drag assessment; and
+        <a href="https://github.com/SWxTREC/enlilviz" rel="noopener">enlilviz</a>, a Python solar
+        wind visualization package that produces the animations and interactive plots space weather
+        forecasters use operationally.
+      </p>
+
+      <h2 id="machine-learning">Physics-constrained machine learning</h2>
+      <p>
+        Alongside building tools for the community, I work on applying machine learning to the
+        spatial and temporal interpolation of magnetic fields. The key idea is to avoid learning raw
+        field values. I wrote
+        <a href="https://github.com/greglucas/pysecs" rel="noopener">pysecs</a>, a Spherical
+        Elementary Current System implementation, to reduce the problem to a set of divergence-free
+        basis functions — which guarantees the underlying physical constraints hold no matter what
+        the network predicts.
+      </p>
+      <p>
+        We then trained a deep neural network to fit those basis functions using synthetic
+        observations from expensive HPC models that cannot run in real time. Reducing
+        dimensionality with physical basis functions and training against large-scale HPC output has
+        produced markedly more realistic magnetic field interpolations across North America.
+      </p>
+      <p>
+        This line of work continues in
+        <a href="https://doi.org/10.1029/2024JH000151" rel="noopener">LiveWire</a>, which predicts
+        the horizontal geoelectric field an hour ahead using multi-fidelity boosted neural networks.
+      </p>
+
+      <h2 id="operations">Storms and their consequences</h2>
+      <p>
+        Space weather stops being abstract when it takes hardware with it. I contributed to the
+        analysis of
+        <a href="https://doi.org/10.1029/2022SW003330" rel="noopener">the 2022 Starlink incident</a>,
+        where a modest geomagnetic storm expanded the thermosphere enough to bring down 38 newly
+        launched satellites — a concrete demonstration of the threat storms pose to low Earth orbit
+        operations. More recently I have worked on the
+        <a href="https://doi.org/10.1007/s11214-025-01244-9" rel="noopener">I-ALiRT real-time
+        system</a> for NASA's IMAP mission, which turns spacecraft telemetry into forecasting inputs
+        as it arrives.
+      </p>
+
+      <p>
+        <a class="btn btn-ghost" href="/publications#journal">All publications</a>
+        <a class="btn btn-ghost" href="/software">Software &amp; open source</a>
+      </p>
+    </div>
+  </div>
+</Base>

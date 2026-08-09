@@ -1,0 +1,240 @@
+---
+import Base from '../layouts/Base.astro';
+
+const roles = [
+  {
+    org: 'Rocket Lab',
+    title: 'Principal Ground Software Engineer',
+    period: 'Present',
+    body: `Working on the Intermission product area, used for command and control of spacecraft and
+      for analyzing telemetry coming down from satellites.`,
+  },
+  {
+    org: 'Laboratory for Atmospheric and Space Physics',
+    title: 'Professional Research Assistant',
+    period: 'University of Colorado Boulder',
+    body: `Science Data Center Lead for NASA's IMAP mission, leading a team of roughly ten software
+      engineers implementing algorithms for ten instruments built by teams around the world, plus
+      the infrastructure delivering those data products to scientists and the public. Also led
+      model development for the SWx TREC group, bringing scientists' research code into operational
+      environments and deploying it to production.`,
+  },
+  {
+    org: 'United States Geological Survey',
+    title: 'Mendenhall Postdoctoral Fellow',
+    period: 'Geomagnetism Program',
+    body: `Geoelectric hazard research and the risk severe space weather poses to the power grid.
+      Wrote several software packages now widely used by researchers in the field.`,
+  },
+  {
+    org: 'Regis University',
+    title: 'Affiliate Professor',
+    period: 'Introductory Physics Lab',
+    body: 'Taught the introductory physics laboratory course.',
+  },
+  {
+    org: 'Sandia National Laboratories',
+    title: 'Technical Staff Member',
+    period: 'Albuquerque, NM',
+    body: `Space nuclear launch accident safety team. Numerical modeling of accident scenarios and
+      probabilities to assess the risk of launching nuclear material into space, including the
+      safety analysis reports for the Mars Science Laboratory.`,
+  },
+];
+
+const education = [
+  { degree: 'PhD, Aerospace Engineering Sciences', school: 'University of Colorado Boulder' },
+  { degree: 'MS, Medical Physics', school: 'University of Wisconsin' },
+  { degree: 'BS, Nuclear Engineering', school: 'University of Wisconsin' },
+];
+---
+
+<Base
+  title="Experience"
+  description="Greg M. Lucas: Principal Ground Software Engineer at Rocket Lab, previously IMAP Science Data Center Lead at LASP, USGS Mendenhall Postdoctoral Fellow, and nuclear launch safety analyst at Sandia National Laboratories."
+  image="/images/2011_MSL_Countdown.jpg"
+>
+  <div class="page">
+    <div class="section-head">
+      <span class="eyebrow">Engineering &middot; Research &middot; Leadership</span>
+      <h1>Experience</h1>
+      <p class="lede">
+        Fifteen years across national labs, university research and spaceflight industry — with
+        software as the common thread.
+      </p>
+      <div class="btn-row">
+        <a class="btn" href="/docs/Lucas-resume-web.pdf">Full resume (PDF)</a>
+        <a class="btn btn-ghost" href="https://www.linkedin.com/in/greg-lucas-phd/" rel="noopener">
+          LinkedIn
+        </a>
+      </div>
+    </div>
+
+    <div class="layout">
+      <div>
+        <ol class="timeline">
+          {
+            roles.map((r) => (
+              <li>
+                <p class="org">{r.org}</p>
+                <h3>{r.title}</h3>
+                <p class="period">{r.period}</p>
+                <p class="body">{r.body}</p>
+              </li>
+            ))
+          }
+        </ol>
+
+        <section class="edu">
+          <h2>Education</h2>
+          <ul>
+            {
+              education.map((e) => (
+                <li>
+                  <strong>{e.degree}</strong>
+                  <span>{e.school}</span>
+                </li>
+              ))
+            }
+          </ul>
+        </section>
+      </div>
+
+      <aside>
+        <figure class="msl">
+          <img
+            src="/images/2011_MSL_Countdown.jpg"
+            alt="The countdown clock at Cape Canaveral before the launch of the Mars Science Laboratory in 2011"
+            width="600"
+            height="450"
+            loading="lazy"
+          />
+          <figcaption>
+            Cape Canaveral, November 2011 — watching the Mars Science Laboratory launch, the mission
+            my team wrote the safety analysis report for.
+          </figcaption>
+        </figure>
+
+        <div class="note">
+          <p>
+            I completed my BS in nuclear engineering and MS in medical physics at the University of
+            Wisconsin, then joined Sandia National Laboratories on a launch accident safety team.
+            After returning to school for a PhD at the University of Colorado, I went to the USGS as
+            a Mendenhall Fellow, then to LASP, where I pioneered work blending research with
+            software engineering for space weather applications.
+          </p>
+        </div>
+      </aside>
+    </div>
+  </div>
+</Base>
+
+<style>
+  .layout {
+    display: grid;
+    grid-template-columns: 1.35fr 1fr;
+    gap: clamp(2rem, 5vw, 3.5rem);
+    align-items: start;
+  }
+
+  @media (max-width: 900px) {
+    .layout {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .timeline {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-left: 2px solid var(--border);
+  }
+
+  .timeline li {
+    position: relative;
+    padding: 0 0 2rem 1.75rem;
+  }
+
+  .timeline li::before {
+    content: '';
+    position: absolute;
+    left: -7px;
+    top: 0.45rem;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--brand);
+    border: 2px solid var(--bg);
+  }
+
+  .org {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .timeline h3 {
+    margin: 0.15rem 0;
+  }
+
+  .period {
+    font-size: 0.875rem;
+    color: var(--text-faint);
+    margin-bottom: 0.55rem;
+  }
+
+  .body {
+    color: var(--text-muted);
+    font-size: 0.9375rem;
+    max-width: 54ch;
+  }
+
+  .edu {
+    margin-top: 1rem;
+  }
+
+  .edu h2 {
+    padding-bottom: 0.6rem;
+    border-bottom: 2px solid var(--brand);
+    margin-bottom: 1rem;
+  }
+
+  .edu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .edu li {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.25rem 1rem;
+    padding: 0.7rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .edu li:last-child {
+    border-bottom: 0;
+  }
+
+  .edu span {
+    color: var(--text-muted);
+    font-size: 0.9375rem;
+  }
+
+  .msl {
+    margin: 0 0 1.5rem;
+  }
+
+  .note {
+    padding: 1.25rem 1.4rem;
+    background: var(--bg-subtle);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    font-size: 0.9375rem;
+    color: var(--text-muted);
+  }
+</style>

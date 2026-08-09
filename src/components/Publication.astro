@@ -1,0 +1,158 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  pub: CollectionEntry<'publications'>['data'];
+}
+
+const { pub } = Astro.props;
+
+const href = pub.doi ? `https://doi.org/${pub.doi}` : pub.url;
+
+/** Authors are stored "Family, I. I."; highlight Greg's own entries. */
+const isSelf = (author: string) => /^Lucas,/.test(author);
+
+/**
+ * Journal-style trailing detail: "Space Weather, 18(2), 185-195."
+ */
+const detailParts: string[] = [];
+if (pub.venue) detailParts.push(pub.venue);
+if (pub.book && pub.book !== pub.venue) detailParts.push(pub.book);
+if (pub.institution && pub.institution !== pub.venue) detailParts.push(pub.institution);
+if (pub.meeting) detailParts.push(pub.meeting);
+
+let locator = '';
+if (pub.volume) locator = String(pub.volume);
+if (pub.volume && pub.issue) locator += `(${pub.issue})`;
+if (pub.pages) locator += locator ? `, ${pub.pages}` : `pp. ${pub.pages}`;
+if (!locator && pub.article) locator = `art. ${pub.article}`;
+else if (locator && pub.article) locator += `, art. ${pub.article}`;
+if (locator) detailParts.push(locator);
+if (pub.number) detailParts.push(pub.number);
+---
+
+<li class="pub">
+  <p class="title">
+    {href ? <a href={href} rel="noopener">{pub.title}</a> : <span>{pub.title}</span>}
+  </p>
+
+  <p class="meta">
+    <span class="authors">
+      {
+        pub.authors.map((a, i) => (
+          <>
+            {i > 0 && ', '}
+            {isSelf(a) ? <b>{a}</b> : a}
+          </>
+        ))
+      }
+    </span>{' '}
+    <span class="year">({pub.year}).</span>{' '}
+    {detailParts.length > 0 && <span class="detail">{detailParts.join(', ')}.</span>}
+  </p>
+
+  {
+    (pub.links?.length || pub.doi || typeof pub.citations === 'number') && (
+      <p class="tags">
+        {typeof pub.citations === 'number' && pub.citations > 0 && (
+          <a
+            class="tag tag-cites"
+            href={`https://api.openalex.org/works/doi:${pub.doi}`}
+            rel="noopener"
+            title="Citation count from OpenAlex, refreshed weekly"
+          >
+            Cited by {pub.citations}
+          </a>
+        )}
+        {pub.doi && (
+          <a class="tag" href={`https://doi.org/${pub.doi}`} rel="noopener">
+            doi:{pub.doi}
+          </a>
+        )}
+        {pub.links?.map((l) => (
+          <a class="tag" href={l.href} rel="noopener">
+            {l.label}
+          </a>
+        ))}
+      </p>
+    )
+  }
+</li>
+
+<style>
+  .pub {
+    padding: 1.1rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .pub:last-child {
+    border-bottom: 0;
+  }
+
+  .title {
+    font-weight: 600;
+    line-height: 1.4;
+    margin-bottom: 0.25rem;
+  }
+
+  .title a {
+    text-decoration: none;
+  }
+
+  .title a:hover {
+    text-decoration: underline;
+  }
+
+  .title span {
+    color: var(--text);
+  }
+
+  .meta {
+    font-size: 0.9375rem;
+    color: var(--text-muted);
+    line-height: 1.55;
+  }
+
+  .meta b {
+    color: var(--text);
+    font-weight: 650;
+  }
+
+  .detail {
+    font-style: italic;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 0.6rem;
+  }
+
+  .tag {
+    display: inline-block;
+    padding: 0.12rem 0.55rem;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--bg-subtle);
+    font-size: 0.75rem;
+    font-weight: 550;
+    color: var(--text-faint);
+    text-decoration: none;
+    white-space: nowrap;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .tag:hover {
+    color: var(--brand);
+    border-color: var(--brand);
+  }
+
+  .tag-cites {
+    color: var(--brand);
+    background: color-mix(in srgb, var(--brand) 9%, transparent);
+    border-color: color-mix(in srgb, var(--brand) 25%, transparent);
+  }
+</style>

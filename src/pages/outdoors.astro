@@ -1,0 +1,157 @@
+---
+import Base from '../layouts/Base.astro';
+
+const features = [
+  {
+    title: 'Trail running',
+    image: '/images/outdoors-img-2.jpg',
+    alt: 'Running the Maroon Bells Four Pass Loop in the Colorado high country',
+    body: `While I was at Sandia, a group of us ran together every day over lunch. Eventually
+      several of us decided to run the Maroon Bells Four Pass Loop together. I have run four
+      marathons and paced friends through 100-mile ultramarathons.`,
+    second: '/images/outdoors-img-3.jpg',
+    secondAlt: 'Pacing a friend during her 100-mile ultramarathon',
+  },
+  {
+    title: 'Rock climbing',
+    image: '/images/outdoors-img-4.jpg',
+    alt: 'Climbing "On the Lamb", a horizontal crack route in Tuolumne Meadows, Yosemite',
+    body: `I have been lucky enough to travel across the United States and abroad for a wide range
+      of climbing styles. Yosemite is my favourite national park — this is "On the Lamb" in
+      Tuolumne Meadows, a horizontal crack for four pitches.`,
+  },
+  {
+    title: 'Around Boulder',
+    image: '/images/outdoors-img-5.jpg',
+    alt: 'Scrambling on the Flatirons above Boulder, Colorado',
+    body: `Colorado's climate means climbing and biking are possible year round. Above is a scramble
+      on the Flatirons; below, a singletrack loop I can ride to straight from the house. Most
+      evenings involve one or the other.`,
+    second: '/images/outdoors-img-6.jpg',
+    secondAlt: 'Riding a singletrack mountain bike loop near Boulder',
+  },
+];
+
+const gallery = [
+  { src: '/images/outdoors-img-7.jpg', alt: 'Outdoor adventure in the mountains' },
+  { src: '/images/outdoors-img-8.jpg', alt: 'Outdoor adventure in the mountains' },
+  { src: '/images/outdoors-img-9.jpg', alt: 'Outdoor adventure in the mountains' },
+  { src: '/images/outdoors-img-10.jpg', alt: 'Outdoor adventure in the mountains' },
+  { src: '/images/outdoors-img-1.jpg', alt: 'Outdoor adventure in the mountains' },
+];
+---
+
+<Base
+  title="Outdoors"
+  description="Running, climbing and biking in Colorado — what Greg M. Lucas gets up to away from the keyboard."
+  image="/images/outdoors-img-5.jpg"
+>
+  <div class="page">
+    <div class="section-head">
+      <span class="eyebrow">Running &middot; Biking &middot; Climbing</span>
+      <h1>Outdoors</h1>
+      <p class="lede">
+        When I am not working I am outside as much as possible. Time in the mountains makes for
+        better concentration at a desk, and an intellectually demanding job seems to make for better
+        days outside too.
+      </p>
+    </div>
+
+    <p class="prose intro">
+      I grew up playing a lot of sports, mostly soccer, and still play in men's leagues and pick up
+      ultimate frisbee to keep the competitive itch scratched. Running is the one that stuck: four
+      marathons so far, plus pacing friends at ultramarathons.
+    </p>
+
+    {
+      features.map((f) => (
+        <section class="feature">
+          <div class="images">
+            <img src={f.image} alt={f.alt} width="800" height="600" loading="lazy" />
+            {f.second && <img src={f.second} alt={f.secondAlt} width="800" height="600" loading="lazy" />}
+          </div>
+          <div class="text">
+            <h2>{f.title}</h2>
+            <p>{f.body}</p>
+          </div>
+        </section>
+      ))
+    }
+
+    <section class="more">
+      <h2>Everything else</h2>
+      <div class="gallery">
+        {gallery.map((g) => <img src={g.src} alt={g.alt} width="600" height="450" loading="lazy" />)}
+      </div>
+    </section>
+  </div>
+</Base>
+
+<style>
+  .intro {
+    margin-bottom: 3.5rem;
+  }
+
+  .feature {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: clamp(1.5rem, 4vw, 3rem);
+    align-items: center;
+    margin-bottom: 4rem;
+  }
+
+  .feature:nth-child(even) .images {
+    order: 2;
+  }
+
+  @media (max-width: 800px) {
+    .feature {
+      grid-template-columns: 1fr;
+    }
+
+    .feature:nth-child(even) .images {
+      order: 0;
+    }
+  }
+
+  .images {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .images img {
+    width: 100%;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    object-fit: cover;
+    aspect-ratio: 4 / 3;
+  }
+
+  .text h2 {
+    margin-bottom: 0.75rem;
+  }
+
+  .text p {
+    color: var(--text-muted);
+  }
+
+  .more h2 {
+    padding-bottom: 0.6rem;
+    border-bottom: 2px solid var(--brand);
+    margin-bottom: 1.5rem;
+  }
+
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+    gap: 1rem;
+  }
+
+  .gallery img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+  }
+</style>

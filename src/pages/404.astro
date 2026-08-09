@@ -1,0 +1,73 @@
+---
+import Base from '../layouts/Base.astro';
+
+// The old Angular site used nested routes under /research/GEC/*. Those pages are
+// now sections of a single page, so point visitors from stale links at the right
+// place instead of a dead end.
+const redirects = [
+  { from: '/research/GEC', to: '/research/global-electric-circuit' },
+  { from: '/research/GEC/waccm-gec', to: '/research/global-electric-circuit#model' },
+  { from: '/research/GEC/conductivity', to: '/research/global-electric-circuit#conductivity' },
+  { from: '/research/GEC/sources', to: '/research/global-electric-circuit#sources' },
+  { from: '/research/GEC/top-potential', to: '/research/global-electric-circuit#top-potential' },
+  {
+    from: '/research/GEC/magnetospheric-currents',
+    to: '/research/global-electric-circuit#magnetospheric-currents',
+  },
+  { from: '/research/GEC/results', to: '/research/global-electric-circuit#results' },
+];
+---
+
+<Base title="Page not found" description="That page does not exist." noindex>
+  <div class="page notfound">
+    <p class="code">404</p>
+    <h1>Page not found</h1>
+    <p class="lede">
+      That page does not exist. It may have moved when the site was reorganized &mdash; the
+      research sections in particular now live on single pages.
+    </p>
+
+    <div class="btn-row">
+      <a class="btn" href="/">Home</a>
+      <a class="btn btn-ghost" href="/research">Research</a>
+      <a class="btn btn-ghost" href="/publications">Publications</a>
+    </div>
+  </div>
+
+  <script is:inline set:html={`
+    (function () {
+      var map = ${JSON.stringify(Object.fromEntries(redirects.map((r) => [r.from.toLowerCase(), r.to])))};
+      var path = window.location.pathname.replace(/\\/+$/, '').toLowerCase();
+      var target = map[path];
+      if (target) window.location.replace(target);
+    })();
+  `} />
+</Base>
+
+<style>
+  .notfound {
+    padding-block: 3rem 5rem;
+    text-align: center;
+  }
+
+  .code {
+    font-size: clamp(3.5rem, 2rem + 8vw, 6rem);
+    font-weight: 750;
+    line-height: 1;
+    color: var(--brand);
+    opacity: 0.25;
+    letter-spacing: -0.04em;
+  }
+
+  .notfound h1 {
+    margin: 0.25rem 0 1rem;
+  }
+
+  .notfound .lede {
+    margin: 0 auto 2rem;
+  }
+
+  .notfound .btn-row {
+    justify-content: center;
+  }
+</style>

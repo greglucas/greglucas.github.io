@@ -1,0 +1,100 @@
+---
+import Base from '../../layouts/Base.astro';
+---
+
+<Base
+  title="Geoelectric hazards"
+  description="Geoelectric hazard analysis for the US high-voltage power grid: 100-year extreme value maps, realistic 3-D Earth conductivity, and reconstructions of historic magnetic superstorms."
+  image="/images/geoelectric_field_100.png"
+>
+  <div class="page">
+    <div class="section-head">
+      <p class="crumb"><a href="/research">Research</a></p>
+      <h1>Geoelectric hazards</h1>
+      <p class="lede">
+        How much geoelectric field would a once-per-century magnetic storm drive through the North
+        American power grid, and where would it hurt most?
+      </p>
+    </div>
+
+    <div class="prose stack">
+      <p>
+        During my Mendenhall Postdoctoral Fellowship with the USGS Geomagnetism Program, I worked on
+        geoelectric hazards and the risk severe space weather poses to the nation's power grid. The
+        central problem is that the geoelectric field driven by a magnetic storm depends strongly on
+        the electrical conductivity of the ground beneath the grid — and that conductivity varies by
+        orders of magnitude across the continent. Hazard estimates built on a uniform Earth can be
+        wrong by a factor of ten in either direction.
+      </p>
+      <p>
+        To work with the magnetotelluric survey data, magnetic observatory records and grid models
+        involved, I wrote <a href="https://github.com/greglucas/bezpy" rel="noopener">bezpy</a>, an
+        open-source Python package that handles the variety of data sources and formats in this
+        field. It is now used well beyond my own work.
+      </p>
+
+      <figure>
+        <img
+          src="/images/geoelectric_field_100.png"
+          alt="Map of the United States showing modeled 100-year extreme geoelectric field amplitudes, with the highest values concentrated in regions of resistive crust"
+          width="1000"
+          height="620"
+          loading="lazy"
+        />
+        <figcaption>
+          Modeled geoelectric field amplitudes for a 100-year magnetic storm. The strongest fields
+          track geology, not latitude — resistive crust concentrates the hazard.
+        </figcaption>
+      </figure>
+
+      <p>
+        That analysis culminated in
+        <a href="https://doi.org/10.1029/2019SW002329" rel="noopener">a 100-year geoelectric hazard
+        analysis for the U.S. high-voltage power grid</a>, which estimated the likely magnitude of
+        both geoelectric fields and the induced voltages along individual transmission lines. To
+        make the result checkable rather than merely citable, the full analysis is published as a
+        Jupyter notebook in
+        <a href="https://github.com/greglucas/GeoelectricHazardPaper2019" rel="noopener">a public
+        repository</a>.
+      </p>
+
+      <figure>
+        <img
+          src="/images/geoelectric_voltage_Ebar_100.png"
+          alt="Map of induced voltages along US high-voltage transmission lines for a 100-year storm, with the largest voltages in the upper Midwest and Northeast"
+          width="1000"
+          height="620"
+          loading="lazy"
+        />
+        <figcaption>
+          Induced voltages on individual transmission lines. Long lines crossing resistive terrain
+          accumulate the largest potentials.
+        </figcaption>
+      </figure>
+
+      <h2>Historic superstorms</h2>
+      <p>
+        The same machinery can run backwards. With colleagues at the USGS I helped reconstruct the
+        geoelectric hazard of storms that predate modern instrumentation — the
+        <a href="https://doi.org/10.1029/2021SW003030" rel="noopener">March 1989 superstorm</a> that
+        collapsed the Hydro-Québec grid, the
+        <a href="https://doi.org/10.1029/2022SW003379" rel="noopener">March 1940 storm</a> and its
+        effects on American communication and power systems, the
+        <a href="https://doi.org/10.1029/2025SW004563" rel="noopener">May 1921 superstorm</a>, and
+        ultimately <a href="https://doi.org/10.1029/2025GL116835" rel="noopener">the 1859 Carrington
+        event</a> itself.
+      </p>
+      <p>
+        A related thread asks how well we can even measure this: whether
+        <a href="https://doi.org/10.1029/2020SW002693" rel="noopener">national-scale magnetotelluric
+        surveys sample the ground densely enough</a> to support hazard estimation at all, and how
+        <a href="https://doi.org/10.1029/2021EA001792" rel="noopener">realistic surface impedance
+        changes the mapped E3 hazard from a nuclear electromagnetic pulse</a>.
+      </p>
+
+      <p>
+        <a class="btn btn-ghost" href="/publications#journal">All publications</a>
+      </p>
+    </div>
+  </div>
+</Base>

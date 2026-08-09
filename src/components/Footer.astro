@@ -1,0 +1,88 @@
+---
+const year = new Date().getFullYear();
+
+const social = [
+  { href: 'mailto:greg.m.lucas@gmail.com', label: 'Email' },
+  { href: 'https://github.com/greglucas', label: 'GitHub' },
+  { href: 'https://www.linkedin.com/in/greg-lucas-phd/', label: 'LinkedIn' },
+  { href: 'https://scholar.google.com/citations?user=0CWZSCUAAAAJ', label: 'Google Scholar' },
+  { href: 'https://orcid.org/0000-0003-1331-1863', label: 'ORCID' },
+];
+---
+
+<footer class="site-footer">
+  <div class="page inner">
+    <div>
+      <p class="name">Greg M. Lucas</p>
+      <p class="muted">Principal Ground Software Engineer, Rocket Lab &middot; Boulder, Colorado</p>
+    </div>
+
+    <ul class="social">
+      {
+        social.map((s) => (
+          <li>
+            <a href={s.href} rel={s.href.startsWith('http') ? 'me noopener' : undefined}>
+              {s.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+
+  <div class="page copyright">
+    <p>&copy; 2016&ndash;{year} Greg M. Lucas</p>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    border-top: 1px solid var(--border);
+    background: var(--bg-subtle);
+    padding-block: 2.5rem 1.75rem;
+  }
+
+  .inner {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem 2rem;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .name {
+    font-weight: 650;
+  }
+
+  .muted {
+    color: var(--text-muted);
+    font-size: 0.9375rem;
+  }
+
+  .social {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem 1.15rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .social a {
+    font-size: 0.9375rem;
+    font-weight: 550;
+    text-decoration: none;
+  }
+
+  .social a:hover {
+    text-decoration: underline;
+  }
+
+  .copyright {
+    margin-top: 1.75rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--border);
+    font-size: 0.875rem;
+    color: var(--text-faint);
+  }
+</style>

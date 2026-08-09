@@ -1,0 +1,201 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Publication from '../components/Publication.astro';
+import { PUB_TYPES } from '../content.config';
+
+const GROUPS: Record<(typeof PUB_TYPES)[number], string> = {
+  journal: 'Peer-reviewed journal articles',
+  chapter: 'Book chapters',
+  thesis: 'Thesis',
+  report: 'Technical reports',
+  conference: 'Conference papers',
+  poster: 'Conference posters',
+};
+
+const all = await getCollection('publications');
+
+// Newest first within each group; stable by title for same-year entries.
+const sorted = all
+  .map((e) => e.data)
+  .sort((a, b) => b.year - a.year || a.title.localeCompare(b.title));
+
+const groups = PUB_TYPES.map((type) => ({
+  type,
+  label: GROUPS[type],
+  items: sorted.filter((p) => p.type === type),
+})).filter((g) => g.items.length > 0);
+
+const total = sorted.length;
+const totalCitations = sorted.reduce((sum, p) => sum + (p.citations ?? 0), 0);
+const firstAuthor = sorted.filter((p) => /^Lucas,/.test(p.authors[0])).length;
+const lastUpdated = sorted
+  .map((p) => p.citations_updated)
+  .filter(Boolean)
+  .sort()
+  .at(-1);
+---
+
+<Base
+  title="Publications"
+  description="Peer-reviewed journal articles, book chapters, reports, conference papers and posters by Greg M. Lucas, covering space weather, geoelectric hazards and the global electric circuit."
+>
+  <div class="page">
+    <div class="section-head">
+      <span class="eyebrow">Space weather &middot; Geoelectric hazards &middot; Global electric circuit</span>
+      <h1>Publications</h1>
+      <p class="lede">
+        {total} publications spanning atmospheric electricity, geomagnetic hazard analysis and
+        nuclear launch safety. Metadata is generated from each paper's DOI, so it matches the
+        publisher of record.
+      </p>
+    </div>
+
+    <dl class="stats">
+      <div>
+        <dt>Publications</dt>
+        <dd>{total}</dd>
+      </div>
+      <div>
+        <dt>First author</dt>
+        <dd>{firstAuthor}</dd>
+      </div>
+      {
+        totalCitations > 0 && (
+          <div>
+            <dt>Citations</dt>
+            <dd>{totalCitations.toLocaleString('en-US')}</dd>
+          </div>
+        )
+      }
+    </dl>
+
+    <div class="btn-row profiles">
+      <a class="btn btn-ghost" href="https://scholar.google.com/citations?user=0CWZSCUAAAAJ" rel="noopener">
+        Google Scholar
+      </a>
+      <a class="btn btn-ghost" href="https://orcid.org/0000-0003-1331-1863" rel="noopener">
+        ORCID 0000-0003-1331-1863
+      </a>
+    </div>
+
+    <nav class="jump" aria-label="Publication sections">
+      {groups.map((g) => <a href={`#${g.type}`}>{g.label}</a>)}
+    </nav>
+
+    {
+      groups.map((g) => (
+        <section class="group" id={g.type}>
+          <h2>
+            {g.label} <span class="count">{g.items.length}</span>
+          </h2>
+          <ul class="pub-list">
+            {g.items.map((pub) => (
+              <Publication pub={pub} />
+            ))}
+          </ul>
+        </section>
+      ))
+    }
+
+    {
+      totalCitations > 0 && (
+        <p class="footnote">
+          Citation counts come from <a href="https://openalex.org" rel="noopener">OpenAlex</a> and are
+          refreshed weekly{lastUpdated ? ` (last updated ${lastUpdated})` : ''}. They will differ from
+          Google Scholar, which indexes a broader and less curated set of sources.
+        </p>
+      )
+    }
+  </div>
+</Base>
+
+<style>
+  .stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem 2.5rem;
+    margin-bottom: 1.5rem;
+    padding: 1.1rem 1.35rem;
+    background: var(--bg-subtle);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+  }
+
+  .stats dt {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+  }
+
+  .stats dd {
+    margin: 0.1rem 0 0;
+    font-size: 1.65rem;
+    font-weight: 650;
+    line-height: 1.1;
+    color: var(--brand);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .profiles {
+    margin-bottom: 2rem;
+  }
+
+  .jump {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 1.1rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.9375rem;
+  }
+
+  .jump a {
+    text-decoration: none;
+    font-weight: 550;
+  }
+
+  .jump a:hover {
+    text-decoration: underline;
+  }
+
+  .group {
+    margin-top: 3rem;
+  }
+
+  .group h2 {
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 2px solid var(--brand);
+    margin-bottom: 0.5rem;
+  }
+
+  .count {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--text-faint);
+    background: var(--bg-subtle);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 0.05rem 0.5rem;
+  }
+
+  .pub-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .footnote {
+    margin-top: 3rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--border);
+    font-size: 0.875rem;
+    color: var(--text-faint);
+    max-width: var(--measure);
+  }
+</style>
