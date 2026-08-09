@@ -1,0 +1,34 @@
+name: Check outbound links
+
+on:
+  schedule:
+    # 07:00 UTC on the first of each month.
+    - cron: '0 7 1 * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  links:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - run: npm ci
+      - run: npm run build
+
+      # Deliberately not --strict-external: this reports rot so it can be fixed
+      # on purpose, rather than turning someone else's outage into a red X.
+      # Check the run log for the list of unreachable URLs.
+      - name: Check outbound links
+        run: python3 scripts/check_links.py --external

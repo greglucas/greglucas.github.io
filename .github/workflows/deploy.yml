@@ -41,6 +41,12 @@ jobs:
       # entry in publications.yml fails here rather than shipping broken.
       - run: npm run build
 
+      # Internal links only: a broken one is this repository's fault and should
+      # block the deploy. Outbound links are checked weekly instead, so someone
+      # else's outage cannot make this site unpublishable.
+      - name: Check internal links
+        run: python3 scripts/check_links.py
+
       - uses: actions/configure-pages@v5
 
       - uses: actions/upload-pages-artifact@v3

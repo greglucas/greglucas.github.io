@@ -62,6 +62,19 @@ These numbers will be lower than Google Scholar's. Scholar indexes a broader and
 less curated set of sources, and has no API and blocks scraping, so it cannot be
 used as the source here. The publications page says so on the page itself.
 
+## Checking links
+
+```bash
+npm run build
+python3 scripts/check_links.py              # internal links only, offline
+python3 scripts/check_links.py --external   # also check outbound links
+```
+
+Internal links are checked on every deploy and a broken one fails the build.
+Outbound links are checked monthly by `.github/workflows/links.yml`, which
+reports but does not fail — a dead external site is worth knowing about, but
+not worth making this site unpublishable over.
+
 ## Layout
 
 ```
@@ -73,7 +86,7 @@ src/
   pages/                   One file per route
   styles/global.css        Design tokens and shared styles; no CSS framework
 public/                    Served verbatim at the site root (images, resume PDF)
-scripts/                   add_pub.py, update_citations.py (stdlib only)
+scripts/                   add_pub.py, update_citations.py, check_links.py
 ```
 
 Pages are plain `.astro` files. Content that repeats — the experience timeline,
