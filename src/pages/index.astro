@@ -1,0 +1,175 @@
+---
+import Base from '../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+
+const pubs = await getCollection('publications');
+const pubCount = pubs.length;
+
+const highlights = [
+  {
+    title: 'Space weather & ground software',
+    image: '/images/science_technology_square.jpg',
+    body: `Building command-and-control and telemetry systems for spacecraft at Rocket Lab, after
+      leading the Science Data Center for NASA's IMAP mission — ten instrument teams, one
+      processing pipeline, and the infrastructure that delivers the data to the public.`,
+    href: '/experience',
+    cta: 'Experience',
+  },
+  {
+    title: 'Open source scientific Python',
+    image: '/images/GEC_all.png',
+    body: `Maintainer of Matplotlib and Cartopy, two visualization libraries used by millions of
+      people, plus a set of domain packages — bezpy, pysecs, pymsis, enlilviz — that came
+      straight out of the research.`,
+    href: '/software',
+    cta: 'Software',
+  },
+  {
+    title: 'Geoelectric hazards research',
+    image: '/images/geoelectric_field_100.png',
+    body: `Mapping the risk severe geomagnetic storms pose to the North American power grid,
+      including the first 100-year geoelectric hazard analysis for the US high-voltage
+      network and reconstructions of the 1921, 1940 and 1989 superstorms.`,
+    href: '/research/geoelectric',
+    cta: 'Research',
+  },
+];
+---
+
+<Base
+  title="Greg M. Lucas"
+  description="Greg M. Lucas is a Principal Ground Software Engineer at Rocket Lab and a scientist working on space weather, geoelectric hazards and open-source scientific Python."
+>
+  <section class="hero">
+    <div class="page hero-inner">
+      <div class="hero-text">
+        <p class="eyebrow">Engineer &middot; Scientist &middot; Open-source maintainer</p>
+        <h1>Greg M. Lucas</h1>
+        <p class="lede">
+          I build the software that gets science off the ground &mdash; spacecraft ground systems at
+          Rocket Lab, data pipelines for NASA missions, and open-source tools the research community
+          runs on every day.
+        </p>
+        <div class="btn-row">
+          <a class="btn" href="/publications">{pubCount} publications</a>
+          <a class="btn btn-ghost" href="/docs/Lucas-resume-web.pdf">Resume (PDF)</a>
+          <a class="btn btn-ghost" href="https://github.com/greglucas" rel="noopener">GitHub</a>
+        </div>
+      </div>
+
+      <img
+        class="hero-img"
+        src="/images/field-lucas-small.jpg"
+        alt="Greg Lucas in the field with atmospheric electricity instrumentation"
+        width="640"
+        height="427"
+        fetchpriority="high"
+      />
+    </div>
+  </section>
+
+  <div class="page">
+    <section class="intro prose stack">
+      <p>
+        I am a Principal Ground Software Engineer at <a href="https://rocketlabcorp.com" rel="noopener">Rocket
+        Lab</a>, working on the Intermission product area for spacecraft command and control and
+        satellite telemetry analysis.
+      </p>
+      <p>
+        Before that I was at the Laboratory for Atmospheric and Space Physics, where I was Science
+        Data Center Lead for NASA's <a href="https://imap.princeton.edu" rel="noopener">IMAP</a>
+        mission, and a Mendenhall Postdoctoral Fellow with the USGS Geomagnetism Program. My PhD is
+        in aerospace engineering sciences from the University of Colorado, with
+        <a href="https://www.colorado.edu/aerospace/jeffrey-thayer" rel="noopener">Jeffrey Thayer</a>.
+      </p>
+      <p>
+        The through-line across all of it is the same: take research code that only its author can
+        run, and turn it into something reliable, reproducible and open enough that everyone else
+        can build on it too.
+      </p>
+    </section>
+
+    <section class="highlights">
+      <div class="card-grid">
+        {
+          highlights.map((h) => (
+            <article class="card feature">
+              <img src={h.image} alt="" width="400" height="400" loading="lazy" />
+              <h3>{h.title}</h3>
+              <p>{h.body}</p>
+              <a class="card-link" href={h.href}>
+                {h.cta}
+              </a>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+  </div>
+</Base>
+
+<style>
+  .hero {
+    background: var(--bg-subtle);
+    border-bottom: 1px solid var(--border);
+    padding-block: clamp(2.5rem, 1rem + 6vw, 5rem);
+    margin-top: -3rem;
+    margin-bottom: 3.5rem;
+  }
+
+  .hero-inner {
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: center;
+  }
+
+  .eyebrow {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+  }
+
+  .hero-text h1 {
+    margin-bottom: 1rem;
+  }
+
+  .hero-text .lede {
+    margin-bottom: 1.75rem;
+  }
+
+  .hero-img {
+    width: 100%;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    object-fit: cover;
+    aspect-ratio: 3 / 2;
+  }
+
+  @media (max-width: 820px) {
+    .hero-inner {
+      grid-template-columns: 1fr;
+    }
+
+    .hero-img {
+      order: -1;
+      aspect-ratio: 16 / 9;
+    }
+  }
+
+  .intro {
+    margin-bottom: 3.5rem;
+  }
+
+  .feature img {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    border-radius: var(--radius);
+    margin: -0.35rem 0 0.5rem;
+    background: var(--bg-subtle);
+  }
+</style>

@@ -1,0 +1,96 @@
+---
+import Base from '../../layouts/Base.astro';
+
+const areas = [
+  {
+    href: '/research/geoelectric',
+    title: 'Geoelectric hazards',
+    image: '/images/geoelectric_field_100.png',
+    body: `Quantifying the risk severe geomagnetic storms pose to the North American high-voltage
+      power grid, using realistic three-dimensional Earth conductivity instead of the uniform
+      approximations the industry had relied on.`,
+  },
+  {
+    href: '/research/global-electric-circuit',
+    title: 'Global electric circuit',
+    image: '/images/GEC_all.png',
+    body: `My PhD work: a physics-based model of the electrical connections between thunderstorms,
+      the atmosphere and the ionosphere, built inside a community climate model so the circuit
+      responds to a realistic atmosphere.`,
+  },
+  {
+    href: '/research/space-weather',
+    title: 'Space weather modeling',
+    image: '/images/science_technology_square.jpg',
+    body: `Getting research models out of the lab and into operations — cloud-hosted model staging
+      platforms, physics-constrained machine learning for magnetic field interpolation, and the
+      tooling forecasters actually use.`,
+  },
+];
+---
+
+<Base
+  title="Research"
+  description="Research by Greg M. Lucas on geoelectric hazards to the power grid, the atmospheric global electric circuit, and operational space weather modeling."
+>
+  <div class="page">
+    <div class="section-head">
+      <span class="eyebrow">Atmospheric electricity &middot; Space weather</span>
+      <h1>Research</h1>
+      <p class="lede">
+        My research sits where fundamental science meets engineering: applying data fusion,
+        statistics and machine learning to satellite and ground-based instrumentation to find
+        signals no single dataset reveals on its own.
+      </p>
+    </div>
+
+    <div class="card-grid areas">
+      {
+        areas.map((a) => (
+          <article class="card feature">
+            <img src={a.image} alt="" width="400" height="250" loading="lazy" />
+            <h3>{a.title}</h3>
+            <p>{a.body}</p>
+            <a class="card-link" href={a.href}>
+              Read more
+            </a>
+          </article>
+        ))
+      }
+    </div>
+
+    <hr />
+
+    <section class="prose stack">
+      <h2>Reproducible by default</h2>
+      <p>
+        Working with computers has been a constant since I was young — I started in Perl and have
+        since worked in C, C++, Java, Fortran and my current workhorse, Python. Nearly all of it
+        ends up public: papers ship with the notebooks that produced their figures, and the methods
+        become installable packages rather than a directory of scripts.
+      </p>
+      <p>
+        I am an active maintainer of <a href="https://github.com/matplotlib/matplotlib" rel="noopener">Matplotlib</a>
+        and <a href="https://github.com/scitools/cartopy" rel="noopener">Cartopy</a>, and the author
+        of several domain packages that came directly out of this research. That work has its own
+        page: <a href="/software">software and open source</a>.
+      </p>
+      <p><a class="btn btn-ghost" href="https://github.com/greglucas" rel="noopener">github.com/greglucas</a></p>
+    </section>
+  </div>
+</Base>
+
+<style>
+  .areas {
+    margin-bottom: 1rem;
+  }
+
+  .feature img {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    border-radius: var(--radius);
+    margin: -0.35rem 0 0.5rem;
+    background: var(--bg-subtle);
+  }
+</style>

@@ -1,0 +1,229 @@
+---
+import Base from '../layouts/Base.astro';
+
+const maintained = [
+  {
+    name: 'Matplotlib',
+    role: 'Maintainer',
+    href: 'https://github.com/matplotlib/matplotlib',
+    body: `The plotting library underneath most of scientific Python. I review and merge changes
+      across the codebase, with a focus on the rendering and colour-mapping internals.`,
+  },
+  {
+    name: 'Cartopy',
+    role: 'Maintainer',
+    href: 'https://github.com/scitools/cartopy',
+    body: `Cartographic projections and geospatial plotting for Python, built on top of Matplotlib.
+      Used across the atmospheric, oceanographic and Earth science communities.`,
+  },
+];
+
+const authored = [
+  {
+    name: 'bezpy',
+    href: 'https://github.com/greglucas/bezpy',
+    body: `Reading and working with the magnetotelluric, magnetic observatory and transmission-line
+      data used in geoelectric hazard analysis. Written during my USGS postdoc and now used well
+      beyond it.`,
+    tags: ['Geoelectric hazards', 'Python'],
+  },
+  {
+    name: 'pysecs',
+    href: 'https://github.com/greglucas/pysecs',
+    body: `Spherical Elementary Current Systems: decomposes magnetic field observations into
+      divergence-free basis functions, so interpolation and machine learning respect the underlying
+      physics by construction.`,
+    tags: ['Magnetic fields', 'Python'],
+  },
+  {
+    name: 'pymsis',
+    href: 'https://swxtrec.github.io/pymsis/',
+    body: `A Python interface to the NRLMSIS empirical atmosphere models. Wraps the original Fortran
+      so the model can be called from a notebook, a web API or an operational pipeline without a
+      compiler in the loop.`,
+    tags: ['Atmosphere', 'Python / Fortran'],
+  },
+  {
+    name: 'enlilviz',
+    href: 'https://github.com/SWxTREC/enlilviz',
+    body: `Visualization of Enlil solar wind model output — the animations and interactive plots
+      space weather forecasters use in operational environments.`,
+    tags: ['Solar wind', 'Python'],
+  },
+  {
+    name: 'msis-api',
+    href: 'https://github.com/SWxTREC/msis-api',
+    body: `The serverless API behind the MSIS Visualizer, turning a Fortran atmospheric model into
+      something a browser can query directly.`,
+    tags: ['Cloud', 'Serverless'],
+  },
+];
+
+const reproducible = [
+  {
+    name: 'GeoelectricHazardPaper2019',
+    href: 'https://github.com/greglucas/GeoelectricHazardPaper2019',
+    body: 'Every figure in the 100-year hazard analysis, as a runnable Jupyter notebook.',
+  },
+  {
+    name: 'Lucas-Thesis',
+    href: 'https://github.com/greglucas/Lucas-Thesis',
+    body: 'Slides, source and the full text of my PhD thesis.',
+  },
+];
+---
+
+<Base
+  title="Software & open source"
+  description="Open-source software by Greg M. Lucas: maintainer of Matplotlib and Cartopy, and author of bezpy, pysecs, pymsis and enlilviz for space weather and atmospheric science."
+>
+  <div class="page">
+    <div class="section-head">
+      <span class="eyebrow">Open source</span>
+      <h1>Software</h1>
+      <p class="lede">
+        A paper describes a result; software lets someone else reproduce and extend it. Nearly
+        everything I have built in research has ended up as an installable, documented, publicly
+        maintained package.
+      </p>
+    </div>
+
+    <section class="block">
+      <h2>Libraries I maintain</h2>
+      <p class="section-note">
+        Core scientific Python projects with millions of users, where I share responsibility for
+        review, releases and long-term direction.
+      </p>
+      <div class="card-grid">
+        {
+          maintained.map((p) => (
+            <article class="card">
+              <p class="role">{p.role}</p>
+              <h3>{p.name}</h3>
+              <p>{p.body}</p>
+              <a class="card-link" href={p.href} rel="noopener">
+                Repository
+              </a>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="block">
+      <h2>Packages I wrote</h2>
+      <p class="section-note">
+        Domain tools that came directly out of the research, generalized enough for other people to
+        use.
+      </p>
+      <div class="card-grid">
+        {
+          authored.map((p) => (
+            <article class="card">
+              <h3>{p.name}</h3>
+              <p>{p.body}</p>
+              <p class="tags">
+                {p.tags.map((t) => (
+                  <span class="tag">{t}</span>
+                ))}
+              </p>
+              <a class="card-link" href={p.href} rel="noopener">
+                Repository
+              </a>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="block">
+      <h2>Reproducible research</h2>
+      <p class="section-note">Papers published together with the code that produced them.</p>
+      <ul class="repro">
+        {
+          reproducible.map((p) => (
+            <li>
+              <a href={p.href} rel="noopener">
+                {p.name}
+              </a>
+              <span> &mdash; {p.body}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <p class="all-repos">
+      <a class="btn" href="https://github.com/greglucas" rel="noopener">All repositories on GitHub</a>
+    </p>
+  </div>
+</Base>
+
+<style>
+  .block {
+    margin-bottom: 3.5rem;
+  }
+
+  .block h2 {
+    padding-bottom: 0.6rem;
+    border-bottom: 2px solid var(--brand);
+    margin-bottom: 0.75rem;
+  }
+
+  .section-note {
+    color: var(--text-muted);
+    max-width: var(--measure);
+    margin-bottom: 1.75rem;
+    font-size: 0.9375rem;
+  }
+
+  .role {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+  }
+
+  .tag {
+    padding: 0.1rem 0.5rem;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--bg-subtle);
+    font-size: 0.75rem;
+    font-weight: 550;
+    color: var(--text-faint);
+  }
+
+  .repro {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .repro li {
+    padding: 0.7rem 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.9375rem;
+    color: var(--text-muted);
+  }
+
+  .repro li:last-child {
+    border-bottom: 0;
+  }
+
+  .repro a {
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .all-repos {
+    margin-top: 1rem;
+  }
+</style>
