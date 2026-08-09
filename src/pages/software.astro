@@ -1,81 +1,46 @@
 ---
 import Base from '../layouts/Base.astro';
+import { getCollection } from 'astro:content';
 
-const maintained = [
-  {
-    name: 'Matplotlib',
-    role: 'Maintainer',
-    href: 'https://github.com/matplotlib/matplotlib',
-    body: `The plotting library underneath most of scientific Python. I review and merge changes
-      across the codebase, with a focus on the rendering and colour-mapping internals.`,
-  },
-  {
-    name: 'Cartopy',
-    role: 'Maintainer',
-    href: 'https://github.com/scitools/cartopy',
-    body: `Cartographic projections and geospatial plotting for Python, built on top of Matplotlib.
-      Used across the atmospheric, oceanographic and Earth science communities.`,
-  },
-];
+const sections = await getCollection('software');
+const bySection = Object.fromEntries(sections.map((s) => [s.data.section, s.data.items]));
 
-const authored = [
-  {
-    name: 'bezpy',
-    href: 'https://github.com/greglucas/bezpy',
-    body: `Reading and working with the magnetotelluric, magnetic observatory and transmission-line
-      data used in geoelectric hazard analysis. Written during my USGS postdoc and now used well
-      beyond it.`,
-    tags: ['Geoelectric hazards', 'Python'],
-  },
-  {
-    name: 'pysecs',
-    href: 'https://github.com/greglucas/pysecs',
-    body: `Spherical Elementary Current Systems: decomposes magnetic field observations into
-      divergence-free basis functions, so interpolation and machine learning respect the underlying
-      physics by construction.`,
-    tags: ['Magnetic fields', 'Python'],
-  },
-  {
-    name: 'pymsis',
-    href: 'https://swxtrec.github.io/pymsis/',
-    body: `A Python interface to the NRLMSIS empirical atmosphere models. Wraps the original Fortran
-      so the model can be called from a notebook, a web API or an operational pipeline without a
-      compiler in the loop.`,
-    tags: ['Atmosphere', 'Python / Fortran'],
-  },
-  {
-    name: 'enlilviz',
-    href: 'https://github.com/SWxTREC/enlilviz',
-    body: `Visualization of Enlil solar wind model output — the animations and interactive plots
-      space weather forecasters use in operational environments.`,
-    tags: ['Solar wind', 'Python'],
-  },
-  {
-    name: 'msis-api',
-    href: 'https://github.com/SWxTREC/msis-api',
-    body: `The serverless API behind the MSIS Visualizer, turning a Fortran atmospheric model into
-      something a browser can query directly.`,
-    tags: ['Cloud', 'Serverless'],
-  },
-];
+const maintained = bySection.maintained ?? [];
+const authored = bySection.authored ?? [];
+const reproducible = bySection.reproducible ?? [];
 
-const reproducible = [
-  {
-    name: 'GeoelectricHazardPaper2019',
-    href: 'https://github.com/greglucas/GeoelectricHazardPaper2019',
-    body: 'Every figure in the 100-year hazard analysis, as a runnable Jupyter notebook.',
-  },
-  {
-    name: 'Lucas-Thesis',
-    href: 'https://github.com/greglucas/Lucas-Thesis',
-    body: 'Slides, source and the full text of my PhD thesis.',
-  },
-];
+const citable = [...maintained, ...authored].filter((p) => p.zenodo_concept_doi);
+
+/** Software JSON-LD, so the archived releases are indexed as citable works. */
+const softwareSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Software by Greg M. Lucas',
+  itemListElement: [...maintained, ...authored].map((p, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    item: {
+      '@type': 'SoftwareSourceCode',
+      name: p.name,
+      codeRepository: p.href,
+      programmingLanguage: 'Python',
+      author: { '@type': 'Person', name: 'Greg M. Lucas' },
+      ...(p.zenodo_concept_doi
+        ? {
+            identifier: `https://doi.org/${p.zenodo_concept_doi}`,
+            sameAs: `https://doi.org/${p.zenodo_concept_doi}`,
+          }
+        : {}),
+      ...(p.version ? { softwareVersion: String(p.version) } : {}),
+      ...(p.released ? { dateModified: p.released } : {}),
+    },
+  })),
+};
 ---
 
 <Base
   title="Software & open source"
-  description="Open-source software by Greg M. Lucas: maintainer of Matplotlib and Cartopy, and author of bezpy, pysecs, pymsis and enlilviz for space weather and atmospheric science."
+  description="Open-source software by Greg M. Lucas: maintainer of Matplotlib and Cartopy, and author of bezpy, pysecs, pymsis and enlilviz for space weather and atmospheric science. Archived on Zenodo with citable DOIs."
 >
   <div class="page">
     <div class="section-head">
@@ -86,6 +51,15 @@ const reproducible = [
         everything I have built in research has ended up as an installable, documented, publicly
         maintained package.
       </p>
+      {
+        citable.length > 0 && (
+          <p class="cite-note">
+            {citable.length} of these are archived on Zenodo with a DOI. Each DOI below is a
+            <em> concept DOI</em>: it always resolves to the newest release, so citing it does not
+            go stale. Versions shown are refreshed automatically.
+          </p>
+        )
+      }
     </div>
 
     <section class="block">
@@ -98,9 +72,17 @@ const reproducible = [
         {
           maintained.map((p) => (
             <article class="card">
-              <p class="role">{p.role}</p>
+              {p.role && <p class="role">{p.role}</p>}
               <h3>{p.name}</h3>
               <p>{p.body}</p>
+              {p.zenodo_concept_doi && (
+                <p class="doi">
+                  <a href={`https://doi.org/${p.zenodo_concept_doi}`} rel="noopener">
+                    doi:{p.zenodo_concept_doi}
+                  </a>
+                  {p.version && <span class="ver">v{p.version}</span>}
+                </p>
+              )}
               <a class="card-link" href={p.href} rel="noopener">
                 Repository
               </a>
@@ -122,11 +104,23 @@ const reproducible = [
             <article class="card">
               <h3>{p.name}</h3>
               <p>{p.body}</p>
-              <p class="tags">
-                {p.tags.map((t) => (
-                  <span class="tag">{t}</span>
-                ))}
-              </p>
+              {p.tags && (
+                <p class="tags">
+                  {p.tags.map((t) => (
+                    <span class="tag">{t}</span>
+                  ))}
+                </p>
+              )}
+              {p.zenodo_concept_doi ? (
+                <p class="doi">
+                  <a href={`https://doi.org/${p.zenodo_concept_doi}`} rel="noopener">
+                    doi:{p.zenodo_concept_doi}
+                  </a>
+                  {p.version && <span class="ver">v{p.version}</span>}
+                </p>
+              ) : (
+                <p class="doi no-doi">Not archived on Zenodo</p>
+              )}
               <a class="card-link" href={p.href} rel="noopener">
                 Repository
               </a>
@@ -135,6 +129,44 @@ const reproducible = [
         }
       </div>
     </section>
+
+    {
+      citable.length > 0 && (
+        <section class="block">
+          <h2>Citing this software</h2>
+          <p class="section-note">
+            If any of these were useful in your work, please cite the archived release rather than
+            a bare URL — it is what makes the contribution countable.
+          </p>
+          <div class="scroll-x">
+            <table class="cite-table">
+              <thead>
+                <tr>
+                  <th scope="col">Package</th>
+                  <th scope="col">Concept DOI (cite this)</th>
+                  <th scope="col">Latest</th>
+                  <th scope="col">Released</th>
+                </tr>
+              </thead>
+              <tbody>
+                {citable.map((p) => (
+                  <tr>
+                    <th scope="row">{p.name}</th>
+                    <td>
+                      <a href={`https://doi.org/${p.zenodo_concept_doi}`} rel="noopener">
+                        {p.zenodo_concept_doi}
+                      </a>
+                    </td>
+                    <td>{p.version ? `v${p.version}` : '—'}</td>
+                    <td>{p.released ?? '—'}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      )
+    }
 
     <section class="block">
       <h2>Reproducible research</h2>
@@ -157,9 +189,22 @@ const reproducible = [
       <a class="btn" href="https://github.com/greglucas" rel="noopener">All repositories on GitHub</a>
     </p>
   </div>
+
+  <script is:inline set:html={JSON.stringify(softwareSchema)} type="application/ld+json" />
 </Base>
 
 <style>
+  .cite-note {
+    margin-top: 1rem;
+    padding: 0.9rem 1.15rem;
+    background: var(--bg-subtle);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    font-size: 0.9375rem;
+    color: var(--text-muted);
+    max-width: var(--measure);
+  }
+
   .block {
     margin-bottom: 3.5rem;
   }
@@ -199,6 +244,80 @@ const reproducible = [
     font-size: 0.75rem;
     font-weight: 550;
     color: var(--text-faint);
+  }
+
+  .doi {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8125rem;
+  }
+
+  .doi a {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    text-decoration: none;
+    word-break: break-all;
+  }
+
+  .doi a:hover {
+    text-decoration: underline;
+  }
+
+  .ver {
+    padding: 0.05rem 0.45rem;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--brand) 9%, transparent);
+    border: 1px solid color-mix(in srgb, var(--brand) 25%, transparent);
+    color: var(--brand);
+    font-size: 0.72rem;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  .no-doi {
+    color: var(--text-faint);
+    font-style: italic;
+  }
+
+  .cite-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9375rem;
+    min-width: 34rem;
+  }
+
+  .cite-table th,
+  .cite-table td {
+    text-align: left;
+    padding: 0.65rem 0.9rem 0.65rem 0;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+
+  .cite-table thead th {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    border-bottom: 2px solid var(--border);
+  }
+
+  .cite-table tbody th {
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  .cite-table td a {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    text-decoration: none;
+  }
+
+  .cite-table td a:hover {
+    text-decoration: underline;
   }
 
   .repro {

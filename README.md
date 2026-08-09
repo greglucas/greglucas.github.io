@@ -44,6 +44,22 @@ After adding anything, run `npm run build`. The schema in
 missing required field or a bad DOI format fails the build instead of quietly
 rendering wrong.
 
+## Software and Zenodo DOIs
+
+`src/data/software.yml` drives the /software page. Each archived package carries
+a **concept DOI** — the Zenodo DOI that always resolves to the latest release,
+which is the one people should cite. Set that by hand once; the `version`,
+`version_doi` and `released` fields under it are generated:
+
+```bash
+python3 scripts/update_zenodo.py             # refresh from Zenodo
+python3 scripts/update_zenodo.py --dry-run   # show what would change
+```
+
+Packages with no Zenodo archive just omit `zenodo_concept_doi` and render
+without a DOI. To add one, enable the Zenodo integration on the GitHub repo and
+cut a release, then paste the concept DOI here.
+
 ## Citation counts
 
 `citations` and `citations_updated` in `publications.yml` are generated. Do not
@@ -55,8 +71,8 @@ python3 scripts/update_citations.py --dry-run   # show what would change
 ```
 
 Counts come from [OpenAlex](https://openalex.org), which is fully open and needs
-no API key. `.github/workflows/citations.yml` runs this every Monday and commits
-only if something changed.
+no API key. `.github/workflows/citations.yml` runs this and the Zenodo refresh
+every Monday, and commits only if something changed.
 
 These numbers will be lower than Google Scholar's. Scholar indexes a broader and
 less curated set of sources, and has no API and blocks scraping, so it cannot be
@@ -81,12 +97,15 @@ not worth making this site unpublishable over.
 src/
   content.config.ts        Zod schema for publications; validated at build time
   data/publications.yml    Single source of truth for the publications page
+  data/software.yml        Software list and Zenodo concept DOIs
+  lib/bibtex.ts            Publication -> BibTeX, shared by the page and .bib
   layouts/Base.astro       HTML shell: SEO, Open Graph, JSON-LD, theme, analytics
   components/              Nav, Footer, Publication (one citation entry)
   pages/                   One file per route
   styles/global.css        Design tokens and shared styles; no CSS framework
 public/                    Served verbatim at the site root (images, resume PDF)
-scripts/                   add_pub.py, update_citations.py, check_links.py
+scripts/                   add_pub.py, update_citations.py, update_zenodo.py,
+                           check_links.py (all standard library only)
 ```
 
 Pages are plain `.astro` files. Content that repeats — the experience timeline,
@@ -112,6 +131,11 @@ trigger other workflows.
   Angular URLs.
 - Dark mode follows the OS by default and can be overridden with the toggle in
   the nav; the choice persists in `localStorage`.
+- `/publications.bib` serves the whole list as BibTeX, generated from the same
+  YAML the HTML page renders. Cite keys are assigned across the full list so
+  they are unique, and a key copied from the page matches the downloaded file.
+- Featured publications are marked with `featured` (rank) and `impact` (why) in
+  `publications.yml`; the schema rejects one without the other.
 - Old nested URLs (`/research/GEC/conductivity` and friends) are redirected by
   `src/pages/404.astro` to the corresponding anchor on
   `/research/global-electric-circuit`.

@@ -11,7 +11,8 @@
     "check": "astro check",
     "add-pub": "python3 scripts/add_pub.py",
     "update-citations": "python3 scripts/update_citations.py",
-    "check-links": "python3 scripts/check_links.py"
+    "check-links": "python3 scripts/check_links.py",
+    "update-zenodo": "python3 scripts/update_zenodo.py"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.3",
