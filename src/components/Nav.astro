@@ -15,9 +15,14 @@ const isActive = (href: string) =>
 
 <header class="site-header">
   <nav class="page nav" aria-label="Primary">
-    <a href="/" class="brand">
-      <img src="/images/lucas-logo.png" alt="" width="36" height="36" />
-      <span>Greg&nbsp;M.&nbsp;Lucas</span>
+    {/*
+      The logo is a 1600x628 wordmark that already reads "G.M. LUCAS", so it
+      carries the site name on its own and no adjacent text label is needed.
+      Width and height are kept in the source aspect ratio (2.548:1) - forcing
+      it into a square squashes it.
+    */}
+    <a href="/" class="brand" aria-label="Greg M. Lucas - home">
+      <img src="/images/lucas-logo.png" alt="G.M. Lucas" width="1600" height="628" />
     </a>
 
     <input type="checkbox" id="nav-toggle" class="visually-hidden" />
@@ -88,16 +93,21 @@ const isActive = (href: string) =>
   .brand {
     display: inline-flex;
     align-items: center;
-    gap: 0.6rem;
     margin-right: auto;
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    color: var(--text);
+    padding: 0.2rem 0;
     text-decoration: none;
   }
 
   .brand img {
-    border-radius: 6px;
+    display: block;
+    width: auto;
+    height: 2.75rem;
+  }
+
+  @media (max-width: 480px) {
+    .brand img {
+      height: 2.25rem;
+    }
   }
 
   .nav-links {
