@@ -27,6 +27,20 @@ const sections = [
       </p>
     </div>
 
+    <figure class="hero-figure">
+      <img
+        src="/images/lightning_boulder_square.jpg"
+        alt="A lightning strike over Boulder, Colorado at night"
+        width="1200"
+        height="800"
+        loading="eager"
+      />
+      <figcaption>
+        Thunderstorms are the battery of the global electric circuit, driving current up to the
+        ionosphere and back down through the fair-weather atmosphere everywhere else.
+      </figcaption>
+    </figure>
+
     <nav class="toc" aria-label="Sections on this page">
       {sections.map((s) => <a href={`#${s.id}`}>{s.label}</a>)}
     </nav>
@@ -172,3 +186,17 @@ const sections = [
     </div>
   </div>
 </Base>
+
+<style>
+  .hero-figure {
+    margin: 0 0 2.5rem;
+  }
+
+  .hero-figure img {
+    width: 100%;
+    max-height: 26rem;
+    object-fit: cover;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+  }
+</style>
