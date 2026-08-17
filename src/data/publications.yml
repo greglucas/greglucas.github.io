@@ -43,7 +43,7 @@
   pages: 525-557
   doi: 10.1146/annurev-earth-032524-012356
   citations: 0
-  citations_updated: 2026-08-10
+  citations_updated: 2026-08-17
   featured: 5
   impact: "An invited Annual Reviews article surveying the whole field of magnetic storms and geoelectric hazards. It has no citations yet because it is brand new, but being asked to write the review is the field's way of saying this is settled expertise."
   citations: 0
@@ -87,7 +87,7 @@
   article: 117
   doi: 10.1007/s11214-025-01244-9
   citations: 6
-  citations_updated: 2026-08-10
+  citations_updated: 2026-08-17
 
 - type: journal
   title: Mapping a Carrington Storm
@@ -104,7 +104,7 @@
   issue: 19
   doi: 10.1029/2025GL116835
   citations: 2
-  citations_updated: 2026-08-10
+  citations_updated: 2026-08-17
 
 - type: journal
   title: The Impact of the May 1921 Superstorm on American Telecommunication Systems
@@ -122,7 +122,7 @@
   issue: 7
   doi: 10.1029/2025SW004563
   citations: 3
-  citations_updated: 2026-08-10
+  citations_updated: 2026-08-17
 
 - type: journal
   title: Multi-Scale Intense Geoelectric and Geomagnetic Field Perturbations Observed After an Interplanetary Magnetic Field Turning
@@ -142,7 +142,7 @@
   issue: 2
   doi: 10.1029/2024SW004046
   citations: 5
-  citations_updated: 2026-08-10
+  citations_updated: 2026-08-17
 
 - type: journal
   title: "LiveWire: Horizontal Geoelectric Field Prediction With 1-hr Lead-Time Using Multi-Fidelity Boosted Neural Networks"
@@ -157,7 +157,7 @@
   issue: 4
   doi: 10.1029/2024JH000151
   citations: 1
-  citations_updated: 2026-08-10
+  citations_updated: 2026-08-17
 
 - type: journal
   title: "The March 1940 Superstorm: Geoelectromagnetic Hazards and Impacts on American Communication and Power Systems"
@@ -174,7 +174,7 @@
   issue: 6
   doi: 10.1029/2022SW003379
   citations: 13
-  citations_updated: 2026-08-10
+  citations_updated: 2026-08-17
 
 - type: journal
   title: "The Thermosphere Is a Drag: The 2022 Starlink Incident and the Threat of Geomagnetic Storms to Low Earth Orbit Space Operations"
@@ -193,8 +193,8 @@
   volume: 21
   issue: 3
   doi: 10.1029/2022SW003330
-  citations: 71
-  citations_updated: 2026-08-10
+  citations: 72
+  citations_updated: 2026-08-17
   featured: 4
   impact: "The most-cited paper I have contributed to. A modest geomagnetic storm expanded the thermosphere enough to bring down 38 newly launched Starlink satellites, and this analysis turned that loss into the reference case for how space weather threatens low Earth orbit operations."
   citations: 71
@@ -217,7 +217,7 @@
   article: 1022475
   doi: 10.3389/fphy.2022.1022475
   citations: 16
-  citations_updated: 2026-08-10
+  citations_updated: 2026-08-17
 
 - type: journal
   title: "Mapping a Magnetic Superstorm: March 1989 Geoelectric Hazards and Impacts on United States Power Systems"
@@ -234,7 +234,7 @@
   issue: 5
   doi: 10.1029/2021SW003030
   citations: 33
-  citations_updated: 2026-08-10
+  citations_updated: 2026-08-17
 
 - type: journal
   title: "Down to Earth With Nuclear Electromagnetic Pulse: Realistic Surface Impedance Affects Mapping of the E3 Geoelectric Hazard"
@@ -251,7 +251,7 @@
   issue: 8
   doi: 10.1029/2021EA001792
   citations: 7
-  citations_updated: 2026-08-10
+  citations_updated: 2026-08-17
 
 - type: journal
   title: "Magnetotelluric Sampling and Geoelectric Hazard Estimation: Are National-Scale Surveys Sufficient?"
@@ -268,7 +268,7 @@
   issue: 7
   doi: 10.1029/2020SW002693
   citations: 24
-  citations_updated: 2026-08-10
+  citations_updated: 2026-08-17
 
 - type: journal
   title: Simultaneous Observations of Geoelectric and Geomagnetic Fields Produced by Magnetospheric ULF Waves
@@ -287,7 +287,7 @@
   issue: 18
   doi: 10.1029/2020GL089441
   citations: 18
-  citations_updated: 2026-08-10
+  citations_updated: 2026-08-17
 
 - type: journal
   title: Modified GIC Estimation Using 3-D Earth Conductivity
@@ -300,7 +300,7 @@
   issue: 8
   doi: 10.1029/2020SW002467
   citations: 29
-  citations_updated: 2026-08-10
+  citations_updated: 2026-08-17
 
 - type: journal
   title: A 100-year Geoelectric Hazard Analysis for the U.S. High-Voltage Power Grid
@@ -316,7 +316,7 @@
   issue: 2
   doi: 10.1029/2019SW002329
   citations: 44
-  citations_updated: 2026-08-10
+  citations_updated: 2026-08-17
   featured: 1
   impact: "My signature first-author result: the first nationwide, 100-year extreme-value estimate of geoelectric hazard across the US high-voltage grid, built on realistic 3-D Earth conductivity rather than the uniform-Earth assumption the industry had relied on. Every figure ships as a runnable notebook, so the analysis can be checked rather than taken on faith."
   citations: 44
@@ -336,7 +336,7 @@
   pages: 379-395
   doi: 10.1029/2018SW002068
   citations: 34
-  citations_updated: 2026-08-10
+  citations_updated: 2026-08-17
 
 - type: journal
   title: Geoelectric Hazard Maps for the Pacific Northwest
@@ -352,7 +352,7 @@
   pages: 1114-1127
   doi: 10.1029/2018SW001844
   citations: 18
-  citations_updated: 2026-08-10
+  citations_updated: 2026-08-17
 
 - type: journal
   title: "Calculation of Voltages in Electric Power Transmission Lines During Historic Geomagnetic Storms: An Investigation Using Realistic Earth Impedances"
@@ -367,7 +367,7 @@
   pages: 185-195
   doi: 10.1002/2017SW001779
   citations: 62
-  citations_updated: 2026-08-10
+  citations_updated: 2026-08-17
   featured: 2
   impact: "My most-cited first-author paper. It showed that using realistic Earth impedances instead of uniform ground changes computed transmission-line voltages during historic storms by enough to matter operationally, which reframed how induced voltages are estimated for real grid segments."
   citations: 62
@@ -387,7 +387,7 @@
   pages: 5-14
   doi: 10.1002/2017GL076042
   citations: 62
-  citations_updated: 2026-08-10
+  citations_updated: 2026-08-17
 
 - type: journal
   title: Analysis of the Diurnal Variation of the Global Electric Circuit Obtained From Different Numerical Models
@@ -407,7 +407,7 @@
   pages: 12906-12917
   doi: 10.1002/2017JD026515
   citations: 10
-  citations_updated: 2026-08-10
+  citations_updated: 2026-08-17
 
 - type: journal
   title: Statistical analysis of spatial and temporal variations in atmospheric electric fields from a regional array of field mills
@@ -422,7 +422,7 @@
   pages: 1158-1174
   doi: 10.1002/2016JD025944
   citations: 40
-  citations_updated: 2026-08-10
+  citations_updated: 2026-08-17
 
 - type: journal
   title: A global electric circuit model within a community climate model
@@ -437,7 +437,7 @@
   pages: 12054-12066
   doi: 10.1002/2015JD023562
   citations: 37
-  citations_updated: 2026-08-10
+  citations_updated: 2026-08-17
   featured: 3
   impact: "The core of my PhD: WACCM-GEC, the first global electric circuit model solved inside a full community climate model, so atmospheric electricity responds to a physically realistic atmosphere instead of a prescribed one. Selected for a research spotlight in Eos."
   citations: 37
@@ -457,7 +457,7 @@
   pages: 3007-3020
   doi: 10.5194/gmd-8-3007-2015
   citations: 39
-  citations_updated: 2026-08-10
+  citations_updated: 2026-08-17
 
 - type: journal
   title: The winter helium bulge revisited
@@ -477,7 +477,7 @@
   pages: 6603-6609
   doi: 10.1002/2014GL061471
   citations: 31
-  citations_updated: 2026-08-10
+  citations_updated: 2026-08-17
 
 - type: journal
   title: On the role of clouds in the fair weather part of the global electric circuit
@@ -493,7 +493,7 @@
   pages: 8599-8610
   doi: 10.5194/acp-14-8599-2014
   citations: 36
-  citations_updated: 2026-08-10
+  citations_updated: 2026-08-17
 
 - type: journal
   title: "Toward a comprehensive global electric circuit model: Atmospheric conductivity and its variability in CESM1(WACCM) model simulations"
@@ -509,7 +509,7 @@
   pages: 9221-9232
   doi: 10.1002/jgrd.50725
   citations: 51
-  citations_updated: 2026-08-10
+  citations_updated: 2026-08-17
 
 - type: chapter
   title: Empirical Estimation of Natural Geoelectric Hazards
@@ -525,7 +525,7 @@
   pages: 93-105
   doi: 10.1002/9781119434412.ch6
   citations: 4
-  citations_updated: 2026-08-10
+  citations_updated: 2026-08-17
 
 - type: thesis
   title: Investigating the Physical Mechanisms That Impact Electric Fields in the Atmosphere
@@ -641,7 +641,7 @@
   meeting: AGU Fall Meeting, Washington, DC
   doi: 10.1002/essoar.10500157.1
   citations: 0
-  citations_updated: 2026-08-10
+  citations_updated: 2026-08-17
 
 - type: poster
   title: Imputation of Geomagnetic Disturbance Fields with Non-Linear Regression Based on Synthetic Data
@@ -652,7 +652,7 @@
   meeting: AGU Fall Meeting, Washington, DC
   doi: 10.1002/essoar.10500173.1
   citations: 0
-  citations_updated: 2026-08-10
+  citations_updated: 2026-08-17
 
 - type: poster
   title: Magnetospheric Coupling to the Global Electric Circuit
