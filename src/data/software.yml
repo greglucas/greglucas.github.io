@@ -43,9 +43,9 @@ authored:
   - name: bezpy
     href: https://github.com/greglucas/bezpy
     zenodo_concept_doi: 10.5281/zenodo.3765860
-    version: 0.1.1
-    version_doi: 10.5281/zenodo.8395357
-    released: 2023-09-30
+    version: 0.2.0
+    version_doi: 10.5281/zenodo.22104720
+    released: 2026-08-26
     tags: [Geoelectric hazards, Python]
     body: >-
       Reading and working with the magnetotelluric, magnetic observatory and transmission-line data
