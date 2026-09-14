@@ -21,9 +21,9 @@ maintained:
     role: Maintainer
     href: https://github.com/matplotlib/matplotlib
     zenodo_concept_doi: 10.5281/zenodo.592536
-    version: 3.11.1
-    version_doi: 10.5281/zenodo.21422872
-    released: 2026-07-18
+    version: 3.11.2
+    version_doi: 10.5281/zenodo.22700776
+    released: 2026-09-11
     body: >-
       The plotting library underneath most of scientific Python. I review and merge changes across
       the codebase, with a focus on the rendering and colour-mapping internals.
