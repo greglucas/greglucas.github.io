@@ -32,9 +32,9 @@ maintained:
     role: Maintainer
     href: https://github.com/scitools/cartopy
     zenodo_concept_doi: 10.5281/zenodo.1182735
-    version: 0.24.1
-    version_doi: 10.5281/zenodo.13905945
-    released: 2024-10-08
+    version: 0.26.0
+    version_doi: 10.5281/zenodo.22804050
+    released: 2026-09-17
     body: >-
       Cartographic projections and geospatial plotting for Python, built on top of Matplotlib. Used
       across the atmospheric, oceanographic and Earth science communities.
